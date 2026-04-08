@@ -1,134 +1,1138 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Midtown Café — Menu</title>
+    <title>Midtown Street Café — Riyadh</title>
     <link rel="icon" type="image/png" href="logo.png" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Jost:wght@200;300;400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&family=Noto+Sans+Arabic:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --cream: #f5f0e8;
-        --dark: #1a1612;
-        --gold: #c9a96e;
-        --gold-light: #e8d5a3;
-        --navy: #1c2b4a;
-        --warm: #8b6f47;
-        --muted: #9a8e7e;
-        --red-accent: #8b2e2e;
+        --blue-deep: #0a1628;
+        --blue-mid: #0e2347;
+        --blue-bright: #1a3a6e;
+        --blue-accent: #2563eb;
+        --blue-glow: #3b82f6;
+        --blue-light: #60a5fa;
+        --brown-dark: #3d2314;
+        --brown-mid: #6b3a1f;
+        --brown-warm: #a0522d;
+        --brown-light: #c8844a;
+        --brown-sand: #e8c49a;
+        --white: #ffffff;
+        --white-95: rgba(255, 255, 255, 0.95);
+        --white-80: rgba(255, 255, 255, 0.8);
+        --white-50: rgba(255, 255, 255, 0.5);
+        --white-20: rgba(255, 255, 255, 0.2);
+        --white-10: rgba(255, 255, 255, 0.1);
+        --white-05: rgba(255, 255, 255, 0.05);
+        --glass: rgba(14, 35, 71, 0.7);
+        --glass-light: rgba(255, 255, 255, 0.06);
       }
-      * {
+      *,
+      *::before,
+      *::after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 56px; /* offset for sticky nav */
+      }
+
       body {
-        background: var(--cream);
-        color: var(--dark);
-        font-family: "Jost", sans-serif;
+        background: var(--blue-deep);
+        color: var(--white);
+        font-family: "Space Grotesk", sans-serif;
         font-weight: 300;
         overflow-x: hidden;
       }
 
-      /* ── HERO ── */
+      /* ─── NOISE OVERLAY ─── */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0.35;
+      }
+
+      /* ─── HERO ─── */
       .hero {
-        height: 100vh;
-        min-height: 700px;
-        background: var(--navy);
+        min-height: 100vh;
+        min-height: 100svh;
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        position: relative;
         overflow: hidden;
+        padding-bottom: 110px;
+        background: radial-gradient(
+          ellipse 80% 60% at 50% 0%,
+          #1a3a6e 0%,
+          #0a1628 60%
+        );
       }
-      .hero::before {
-        content: "";
+
+      /* Animated grid background */
+      .hero-grid {
         position: absolute;
         inset: 0;
-        background:
-          radial-gradient(
-            ellipse 60% 50% at 50% 50%,
-            rgba(201, 169, 110, 0.12) 0%,
-            transparent 70%
-          ),
-          url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A96E' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        background-image:
+          linear-gradient(rgba(37, 99, 235, 0.12) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(37, 99, 235, 0.12) 1px, transparent 1px);
+        background-size: 60px 60px;
+        mask-image: radial-gradient(
+          ellipse 100% 80% at 50% 0%,
+          black 30%,
+          transparent 100%
+        );
+        animation: gridFloat 8s ease-in-out infinite;
       }
-      .hero-line {
-        width: 1px;
-        height: 80px;
-        background: linear-gradient(to bottom, transparent, var(--gold));
-        margin-bottom: 40px;
-        animation: fadeDown 1.5s ease forwards;
-      }
-      .hero-subtitle {
-        font-family: "Jost", sans-serif;
-        font-weight: 200;
-        font-size: 11px;
-        letter-spacing: 8px;
-        text-transform: uppercase;
-        color: var(--gold);
-        margin-bottom: 24px;
-        animation: fadeUp 1s ease 0.3s both;
-      }
-      .hero-title {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(64px, 10vw, 120px);
-        color: var(--cream);
-        line-height: 0.9;
-        text-align: center;
-        letter-spacing: -2px;
-        animation: fadeUp 1s ease 0.5s both;
-      }
-      .hero-title span {
-        display: block;
-        font-style: italic;
-        color: var(--gold);
-      }
-      .hero-tagline {
-        margin-top: 32px;
-        font-family: "Cormorant Garamond", serif;
-        font-size: 18px;
-        font-weight: 300;
-        font-style: italic;
-        color: rgba(245, 240, 232, 0.5);
-        letter-spacing: 2px;
-        animation: fadeUp 1s ease 0.7s both;
-      }
-      .hero-bottom {
-        position: absolute;
-        bottom: 40px;
-        display: flex;
-        align-items: center;
-        gap: 24px;
-        animation: fadeUp 1s ease 1s both;
-      }
-      .hero-bottom-line {
-        width: 60px;
-        height: 1px;
-        background: var(--gold);
-        opacity: 0.4;
-      }
-      .scroll-text {
-        font-size: 10px;
-        letter-spacing: 5px;
-        text-transform: uppercase;
-        color: var(--gold);
-        opacity: 0.7;
-        animation: pulse 2.8s ease-in-out infinite;
-      }
-      @keyframes pulse {
+      @keyframes gridFloat {
         0%,
         100% {
-          opacity: 0.7;
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-12px);
+        }
+      }
+
+      /* Glowing orbs */
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.25;
+        animation: orbFloat 10s ease-in-out infinite;
+      }
+      .orb-1 {
+        width: 600px;
+        height: 600px;
+        background: #1a3a6e;
+        top: -200px;
+        left: -100px;
+        animation-delay: 0s;
+      }
+      .orb-2 {
+        width: 400px;
+        height: 400px;
+        background: #6b3a1f;
+        bottom: -100px;
+        right: 0;
+        animation-delay: -4s;
+      }
+      .orb-3 {
+        width: 300px;
+        height: 300px;
+        background: #2563eb;
+        top: 40%;
+        left: 60%;
+        animation-delay: -7s;
+      }
+      @keyframes orbFloat {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        33% {
+          transform: translate(30px, -20px) scale(1.05);
+        }
+        66% {
+          transform: translate(-20px, 15px) scale(0.97);
+        }
+      }
+
+      /* Corner decorations */
+      .hero-corner {
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        border: 1px solid rgba(37, 99, 235, 0.3);
+        opacity: 0.6;
+      }
+      .hero-corner-tl {
+        top: 30px;
+        left: 30px;
+        border-right: none;
+        border-bottom: none;
+      }
+      .hero-corner-br {
+        bottom: 30px;
+        right: 30px;
+        border-left: none;
+        border-top: none;
+      }
+
+      /* Scan line */
+      .scanline {
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(37, 99, 235, 0.8),
+          transparent
+        );
+        animation: scan 4s linear infinite;
+        opacity: 0.4;
+      }
+      @keyframes scan {
+        0% {
+          top: -2px;
+        }
+        100% {
+          top: 100%;
+        }
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding: 0 20px;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--glass-light);
+        border: 1px solid rgba(37, 99, 235, 0.4);
+        padding: 8px 20px;
+        border-radius: 100px;
+        font-size: 10px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--blue-light);
+        margin-bottom: 40px;
+        animation: fadeUp 1s ease 0.2s both;
+        backdrop-filter: blur(10px);
+      }
+      .hero-badge-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--blue-glow);
+        border-radius: 50%;
+        animation: blink 2s ease-in-out infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
         }
         50% {
           opacity: 0.2;
         }
       }
+
+      .hero-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: clamp(56px, 10vw, 130px);
+        line-height: 0.88;
+        letter-spacing: -3px;
+        animation: fadeUp 1s ease 0.4s both;
+        position: relative;
+      }
+      .hero-title .line1 {
+        color: var(--white);
+        display: block;
+      }
+      .hero-title .line2 {
+        display: block;
+        color: transparent;
+        -webkit-text-stroke: 1.5px var(--brown-light);
+        font-style: italic;
+      }
+      .hero-title .line3 {
+        display: block;
+        background: linear-gradient(
+          135deg,
+          var(--blue-bright),
+          var(--blue-glow),
+          var(--blue-light)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-divider {
+        width: 120px;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--brown-light),
+          transparent
+        );
+        margin: 36px auto;
+        animation: fadeUp 1s ease 0.6s both;
+      }
+
+      .hero-sub {
+        font-size: 14px;
+        letter-spacing: 2px;
+        color: var(--white-50);
+        margin-bottom: 52px;
+        animation: fadeUp 1s ease 0.7s both;
+      }
+
+      .hero-cta-row {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: fadeUp 1s ease 0.9s both;
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(
+          135deg,
+          var(--blue-accent),
+          var(--blue-glow)
+        );
+        color: var(--white);
+        padding: 15px 32px;
+        border-radius: 8px;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s;
+        box-shadow: 0 0 40px rgba(37, 99, 235, 0.4);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 60px rgba(37, 99, 235, 0.6);
+      }
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: transparent;
+        color: var(--white-80);
+        padding: 14px 32px;
+        border-radius: 8px;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+      .btn-secondary:hover {
+        border-color: var(--brown-light);
+        color: var(--brown-sand);
+        transform: translateY(-2px);
+      }
+
+      /* Scroll indicator */
+      .scroll-indicator {
+        position: absolute;
+        bottom: 40px;
+        
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        opacity: 0.5;
+        animation: fadeUp 1s ease 1.2s both;
+        z-index: 10;
+      }
+      .scroll-indicator span {
+        font-size: 9px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--blue-light);
+      }
+      .scroll-line {
+        width: 1px;
+        height: 50px;
+        background: linear-gradient(to bottom, var(--blue-glow), transparent);
+        animation: scrollAnim 2s ease-in-out infinite;
+      }
+      @keyframes scrollAnim {
+        0% {
+          opacity: 0;
+          transform: scaleY(0);
+          transform-origin: top;
+        }
+        50% {
+          opacity: 1;
+          transform: scaleY(1);
+        }
+        100% {
+          opacity: 0;
+          transform: scaleY(0);
+          transform-origin: bottom;
+        }
+      }
+
+      /* ─── STATS BAR ─── */
+      .stats-bar {
+        background: var(--glass);
+        border-top: 1px solid var(--white-10);
+        border-bottom: 1px solid var(--white-10);
+        backdrop-filter: blur(20px);
+        padding: 28px 0;
+      }
+      .stats-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+      }
+      .stat {
+        text-align: center;
+        padding: 0 20px;
+        position: relative;
+      }
+      .stat + .stat::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: var(--white-10);
+      }
+      .stat-num {
+        font-family: "Syne", sans-serif;
+        font-size: 36px;
+        font-weight: 800;
+        color: var(--white);
+        line-height: 1;
+        background: linear-gradient(135deg, var(--white), var(--blue-light));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .stat-label {
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--white-50);
+        margin-top: 6px;
+      }
+
+      /* ─── NAV ─── */
+      .nav-wrap {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(10, 22, 40, 0.92);
+        backdrop-filter: blur(24px);
+        border-bottom: 1px solid rgba(37, 99, 235, 0.2);
+        box-shadow:
+          0 4px 40px rgba(0, 0, 0, 0.5),
+          0 0 0 0 transparent;
+      }
+      .nav {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+        display: flex;
+        align-items: center;
+        gap: 0;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-logo {
+        font-family: "Syne", sans-serif;
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--white);
+        white-space: nowrap;
+        padding-right: 32px;
+        border-right: 1px solid var(--white-10);
+        margin-right: 12px;
+        flex-shrink: 0;
+      }
+      .nav-logo span {
+        color: var(--blue-light);
+      }
+
+      .nav-item {
+        flex-shrink: 0;
+        padding: 18px 18px;
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 500;
+        color: var(--white-50);
+        cursor: pointer;
+        white-space: nowrap;
+        position: relative;
+        transition: color 0.3s;
+      }
+      .nav-item::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 18px;
+        right: 18px;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          var(--blue-accent),
+          var(--brown-light)
+        );
+        transform: scaleX(0);
+        transition: transform 0.3s;
+      }
+      .nav-item:hover,
+      .nav-item.active {
+        color: var(--white);
+      }
+      .nav-item:hover::after,
+      .nav-item.active::after {
+        transform: scaleX(1);
+      }
+
+      /* ─── SECTION ─── */
+      .section {
+        padding: 100px 0 60px;
+        position: relative;
+      }
+      .section-alt {
+        background: rgba(14, 35, 71, 0.3);
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+
+      /* ─── SECTION HEADER ─── */
+      .section-header {
+        display: flex;
+        align-items: flex-end;
+        gap: 32px;
+        margin-bottom: 64px;
+      }
+      .section-num {
+        font-family: "Syne", sans-serif;
+        font-size: 100px;
+        font-weight: 800;
+        line-height: 1;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(37, 99, 235, 0.2);
+        flex-shrink: 0;
+        user-select: none;
+        margin-bottom: -10px;
+      }
+      .section-title-block {
+        flex: 1;
+      }
+      .section-label {
+        font-size: 10px;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: var(--brown-light);
+        margin-bottom: 8px;
+      }
+      .section-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: clamp(36px, 5vw, 60px);
+        line-height: 1;
+        letter-spacing: -1px;
+        color: var(--white);
+      }
+      .section-title em {
+        font-style: italic;
+        color: transparent;
+        -webkit-text-stroke: 1px var(--blue-light);
+      }
+      .section-line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          rgba(37, 99, 235, 0.4),
+          transparent
+        );
+        margin-bottom: 14px;
+      }
+
+      /* ─── MENU LIST ─── */
+      .menu-list-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 0;
+      }
+      .menu-list-item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 22px 20px;
+        border-bottom: 1px solid var(--white-05);
+        border-left: 2px solid transparent;
+        transition: all 0.3s;
+        position: relative;
+        cursor: default;
+      }
+      .menu-list-item::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(37, 99, 235, 0.05),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .menu-list-item:hover::before {
+        opacity: 1;
+      }
+      .menu-list-item:hover {
+        border-left-color: var(--blue-accent);
+      }
+      .item-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: var(--glass-light);
+        border: 1px solid var(--white-10);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        flex-shrink: 0;
+      }
+      .menu-list-content {
+        flex: 1;
+      }
+      .menu-list-name {
+        font-family: "Syne", sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--white-95);
+        margin-bottom: 3px;
+      }
+      .menu-list-desc {
+        font-size: 12px;
+        color: var(--white-50);
+        line-height: 1.5;
+      }
+      .arabic {
+        font-family: "Noto Sans Arabic", sans-serif;
+        font-size: 12px;
+        color: var(--white-40, rgba(255, 255, 255, 0.4));
+        direction: rtl;
+        margin-top: 3px;
+      }
+      .menu-list-right {
+        text-align: right;
+        flex-shrink: 0;
+      }
+      .menu-list-price {
+        font-family: "Syne", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--brown-sand);
+      }
+      .sar {
+        font-size: 10px;
+        font-family: "Space Grotesk", sans-serif;
+        font-weight: 400;
+        vertical-align: super;
+        margin-right: 2px;
+        color: var(--brown-light);
+      }
+      .menu-list-kcal {
+        font-size: 9px;
+        letter-spacing: 2px;
+        color: var(--white-50);
+        text-transform: uppercase;
+        margin-top: 3px;
+      }
+
+      /* ─── PHOTO CARDS ─── */
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+      }
+      .menu-card {
+        background: var(--glass-light);
+        border: 1px solid var(--white-10);
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+        transition: all 0.4s;
+        cursor: default;
+        backdrop-filter: blur(10px);
+      }
+      .menu-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(37, 99, 235, 0.5);
+        box-shadow:
+          0 24px 60px rgba(0, 0, 0, 0.4),
+          0 0 40px rgba(37, 99, 235, 0.15);
+      }
+      .menu-card-img-wrap {
+        overflow: hidden;
+        position: relative;
+      }
+      .menu-card-img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.6s ease;
+        background: linear-gradient(135deg, #0e2347 0%, #1a3a6e 100%);
+      }
+      .menu-card:hover .menu-card-img {
+        transform: scale(1.07);
+      }
+      .menu-card-img-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(10, 22, 40, 0.7) 0%,
+          transparent 50%
+        );
+      }
+      .menu-card-badge {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        background: rgba(10, 22, 40, 0.85);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(37, 99, 235, 0.4);
+        color: var(--brown-sand);
+        font-family: "Syne", sans-serif;
+        font-size: 17px;
+        font-weight: 700;
+        padding: 6px 14px;
+        border-radius: 8px;
+      }
+      .menu-card-body {
+        padding: 20px 22px 22px;
+      }
+      .menu-card-name {
+        font-family: "Syne", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 6px;
+      }
+      .menu-card-desc {
+        font-size: 13px;
+        color: var(--white-50);
+        line-height: 1.6;
+        margin-bottom: 14px;
+      }
+      .menu-card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .menu-card-kcal {
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: var(--white-50);
+        text-transform: uppercase;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        background: rgba(37, 99, 235, 0.15);
+        border: 1px solid rgba(37, 99, 235, 0.3);
+        color: var(--blue-light);
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 3px 10px;
+        border-radius: 100px;
+      }
+
+      /* ─── HERO ITEM (big featured) ─── */
+      .menu-hero-item {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 380px;
+        overflow: hidden;
+        border-radius: 20px;
+        border: 1px solid var(--white-10);
+        margin-bottom: 32px;
+        transition: all 0.4s;
+      }
+      .menu-hero-item:hover {
+        border-color: rgba(37, 99, 235, 0.4);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      }
+      .menu-hero-img-wrap {
+        overflow: hidden;
+        position: relative;
+      }
+      .menu-hero-img {
+        width: 100%;
+        height: 100%;
+        min-height: 380px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.6s;
+        background: linear-gradient(135deg, #1a3a6e, #0a1628);
+      }
+      .menu-hero-item:hover .menu-hero-img {
+        transform: scale(1.04);
+      }
+      .menu-hero-content {
+        background: linear-gradient(135deg, var(--blue-mid), var(--blue-deep));
+        padding: 50px 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .menu-hero-content::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(
+          circle,
+          rgba(37, 99, 235, 0.15),
+          transparent 70%
+        );
+      }
+      .menu-hero-label {
+        font-size: 9px;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: var(--blue-light);
+        margin-bottom: 16px;
+      }
+      .menu-hero-name {
+        font-family: "Syne", sans-serif;
+        font-size: 36px;
+        font-weight: 800;
+        color: var(--white);
+        line-height: 1.1;
+        margin-bottom: 14px;
+      }
+      .menu-hero-desc {
+        font-size: 14px;
+        color: var(--white-50);
+        line-height: 1.7;
+        margin-bottom: 28px;
+      }
+      .menu-hero-footer {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .menu-hero-price {
+        font-family: "Syne", sans-serif;
+        font-size: 34px;
+        font-weight: 800;
+        color: var(--brown-sand);
+      }
+      .menu-hero-kcal {
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: var(--white-50);
+        text-transform: uppercase;
+      }
+
+      /* ─── DRINK CARDS ─── */
+      .drinks-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 16px;
+      }
+      .drink-card {
+        background: var(--glass-light);
+        border: 1px solid var(--white-10);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.4s;
+        cursor: default;
+      }
+      .drink-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(37, 99, 235, 0.4);
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.4),
+          0 0 30px rgba(37, 99, 235, 0.1);
+      }
+      .drink-card-img-wrap {
+        overflow: hidden;
+        height: 160px;
+        position: relative;
+      }
+      .drink-card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.6s;
+        background: linear-gradient(135deg, #1a3a6e, #0e2347);
+      }
+      .drink-card:hover .drink-card-img {
+        transform: scale(1.08);
+      }
+      .drink-card-body {
+        padding: 18px 20px 22px;
+      }
+      .drink-card-name {
+        font-family: "Syne", sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 4px;
+      }
+      .drink-card-desc {
+        font-size: 12px;
+        color: var(--white-50);
+        margin-bottom: 14px;
+      }
+      .drink-card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .drink-card-price {
+        font-family: "Syne", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--brown-sand);
+      }
+      .drink-card-kcal {
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: var(--white-50);
+        text-transform: uppercase;
+      }
+
+      /* ─── SUB HEADING ─── */
+      .sub-heading {
+        font-family: "Syne", sans-serif;
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--white);
+        margin-bottom: 28px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--white-10);
+        position: relative;
+      }
+      .sub-heading::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 48px;
+        height: 2px;
+        background: linear-gradient(90deg, var(--blue-accent), transparent);
+      }
+      .sub-heading em {
+        font-style: italic;
+        color: var(--brown-sand);
+      }
+
+      /* ─── FEATURE BANNER ─── */
+      .feature-banner {
+        background: linear-gradient(
+          135deg,
+          var(--brown-dark),
+          var(--brown-mid)
+        );
+        border: 1px solid rgba(200, 132, 74, 0.3);
+        border-radius: 20px;
+        padding: 56px 60px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 40px;
+        align-items: center;
+        margin: 60px 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .feature-banner::before {
+        content: "";
+        position: absolute;
+        top: -80px;
+        right: -80px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(
+          circle,
+          rgba(200, 132, 74, 0.2),
+          transparent 70%
+        );
+      }
+      .feature-banner-label {
+        font-size: 10px;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: var(--brown-sand);
+        margin-bottom: 12px;
+        opacity: 0.7;
+      }
+      .feature-banner-title {
+        font-family: "Syne", sans-serif;
+        font-size: 40px;
+        font-weight: 800;
+        color: var(--white);
+        line-height: 1.1;
+        margin-bottom: 16px;
+      }
+      .feature-banner-sub {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.7;
+      }
+      .feature-price-block {
+        text-align: right;
+        flex-shrink: 0;
+      }
+      .feature-price {
+        font-family: "Syne", sans-serif;
+        font-size: 60px;
+        font-weight: 800;
+        color: var(--brown-sand);
+        line-height: 1;
+      }
+      .feature-price-label {
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+        margin-top: 6px;
+      }
+
+      /* ─── FOOTER ─── */
+      .footer {
+        background: linear-gradient(135deg, #060d18, #0a1628);
+        border-top: 1px solid var(--white-10);
+        padding: 80px 40px 40px;
+        position: relative;
+        overflow: hidden;
+      }
+      .footer-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 60px;
+        margin-bottom: 60px;
+      }
+      .footer-logo-text {
+        font-family: "Syne", sans-serif;
+        font-size: 36px;
+        font-weight: 800;
+        color: var(--white);
+        line-height: 1;
+        margin-bottom: 16px;
+      }
+      .footer-logo-text span {
+        color: var(--blue-light);
+      }
+      .footer-logo-sub {
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: var(--white-50);
+        text-transform: uppercase;
+        margin-bottom: 24px;
+      }
+      .footer-desc {
+        font-size: 14px;
+        color: var(--white-50);
+        line-height: 1.8;
+      }
+      .footer-col-title {
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--white);
+        margin-bottom: 20px;
+      }
+      .footer-col-item {
+        font-size: 13px;
+        color: var(--white-50);
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      .footer-col-item:hover {
+        color: var(--blue-light);
+      }
+      .footer-bottom {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-top: 30px;
+        border-top: 1px solid var(--white-05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .footer-copy {
+        font-size: 12px;
+        color: var(--white-50);
+        letter-spacing: 1px;
+      }
+      .footer-vat {
+        font-size: 11px;
+        color: var(--white-50);
+        letter-spacing: 2px;
+      }
+      .footer-orb {
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          rgba(37, 99, 235, 0.08),
+          transparent 70%
+        );
+        bottom: -200px;
+        right: -100px;
+        border-radius: 50%;
+      }
+
+      /* ─── UTILITIES ─── */
       @keyframes fadeUp {
         from {
           opacity: 0;
@@ -139,532 +1143,574 @@
           transform: translateY(0);
         }
       }
-      @keyframes fadeDown {
-        from {
-          opacity: 0;
-          height: 0;
-        }
-        to {
-          opacity: 1;
-          height: 80px;
-        }
-      }
 
-      /* ── NAV ── */
-      .nav {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        background: rgba(28, 43, 74, 0.97);
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid rgba(201, 169, 110, 0.2);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
-        padding: 0 40px;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        overflow-x: auto;
-        scrollbar-width: none;
-      }
-      .nav::-webkit-scrollbar {
-        display: none;
-      }
-      .nav-item {
-        flex-shrink: 0;
-        padding: 18px 20px;
-        font-size: 10px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: rgba(245, 240, 232, 0.5);
-        cursor: pointer;
-        white-space: nowrap;
-        border-bottom: 2px solid transparent;
-        transition: all 0.3s;
-      }
-      .nav-item:hover,
-      .nav-item.active {
-        color: var(--gold);
-        border-bottom-color: var(--gold);
-        text-shadow: 0 0 20px rgba(201, 169, 110, 0.4);
-      }
-
-      /* ── SECTION LAYOUT ── */
-      .section {
-        padding: 100px 0 60px;
-      }
-      .section-alt {
-        background: #eae3d3;
-      }
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 40px;
-      }
-      .section-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 70px;
-        gap: 40px;
-      }
-      .section-number {
-        font-family: "Playfair Display", serif;
-        font-size: 120px;
-        line-height: 1;
-        color: transparent;
-        -webkit-text-stroke: 1px rgba(201, 169, 110, 0.22);
-        font-weight: 700;
-        flex-shrink: 0;
-        margin-left: -20px;
-        user-select: none;
-      }
-      .section-title-block {
-        flex: 1;
-      }
-      .section-label {
-        font-size: 10px;
-        letter-spacing: 6px;
-        text-transform: uppercase;
-        color: var(--gold);
-        margin-bottom: 8px;
-      }
-      .section-title {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(40px, 5vw, 64px);
-        line-height: 1;
-        color: var(--navy);
-        letter-spacing: -1px;
-      }
-      .section-title em {
-        font-style: italic;
-        color: var(--warm);
-      }
-      .section-divider {
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(to right, var(--gold), transparent);
-        opacity: 0.4;
-      }
-
-      /* ── PHOTO CARD (items with photos) ── */
-      .menu-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 16px;
-      }
-      .menu-card {
-        position: relative;
-        overflow: hidden;
-        background: #fff;
-        cursor: pointer;
-        border-radius: 12px;
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
-        transition:
-          transform 0.35s ease,
-          box-shadow 0.35s ease;
-      }
-      .menu-card:hover {
-        transform: translateY(-7px);
-        box-shadow: 0 24px 52px rgba(0, 0, 0, 0.15);
-      }
-      .menu-card-img-wrap {
-        overflow: hidden;
-        position: relative;
-      }
-      .menu-card-img {
-        width: 100%;
-        height: 240px;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.6s ease;
-        background: linear-gradient(
-          160deg,
-          #ede5d5 0%,
-          #d8ccb4 45%,
-          #cfc3a5 100%
-        );
-      }
-      .menu-card:hover .menu-card-img {
-        transform: scale(1.06);
-      }
-      .menu-card-badge {
-        position: absolute;
-        top: 14px;
-        right: 14px;
-        background: rgba(28, 43, 74, 0.92);
-        backdrop-filter: blur(8px);
-        color: var(--gold);
-        font-family: "Playfair Display", serif;
-        font-size: 18px;
-        font-weight: 500;
-        padding: 7px 14px;
-        letter-spacing: 0.5px;
-        border-radius: 8px;
-        border: 1px solid rgba(201, 169, 110, 0.25);
-      }
-      .menu-card-badge .sar {
-        color: var(--gold-light) !important;
-        font-size: 11px;
-      }
-      .menu-card-body {
-        padding: 22px 26px 26px;
-        border-top: 2px solid var(--gold);
-        background: #fff;
-      }
-      .menu-card-name {
-        font-family: "Playfair Display", serif;
-        font-size: 20px;
-        font-weight: 500;
-        color: var(--navy);
-        margin-bottom: 6px;
-        line-height: 1.2;
-      }
-      .menu-card-desc {
-        font-family: "Cormorant Garamond", serif;
-        font-size: 16px;
-        color: var(--muted);
-        line-height: 1.7;
-        margin-bottom: 16px;
-        font-style: italic;
-      }
-      .menu-card-footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .menu-card-kcal {
-        font-size: 10px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-      .menu-card-price {
-        font-family: "Playfair Display", serif;
-        font-size: 22px;
-        color: var(--warm);
-        font-weight: 500;
-      }
-
-      /* ── LIST ITEM (items without photos) ── */
-      .menu-list-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 0;
-      }
-      .menu-list-item {
-        display: flex;
-        align-items: center;
-        padding: 22px 0 22px 14px;
-        border-bottom: 1px solid rgba(201, 169, 110, 0.2);
-        border-left: 2px solid transparent;
-        transition:
-          background 0.25s,
-          border-color 0.25s;
-        border-radius: 0 4px 4px 0;
-      }
-      .menu-list-item:hover {
-        background: rgba(201, 169, 110, 0.07);
-        border-left-color: var(--gold);
-      }
-      .menu-list-content {
-        flex: 1;
-      }
-      .menu-list-name {
-        font-family: "Playfair Display", serif;
-        font-size: 17px;
-        color: var(--navy);
-        margin-bottom: 3px;
-        line-height: 1.2;
-      }
-      .menu-list-desc {
-        font-family: "Cormorant Garamond", serif;
-        font-size: 14px;
-        color: var(--muted);
-        font-style: italic;
-      }
-      .menu-list-right {
-        text-align: right;
-        flex-shrink: 0;
-      }
-      .menu-list-price {
-        font-family: "Playfair Display", serif;
-        font-size: 18px;
-        color: var(--warm);
-        font-weight: 500;
-      }
-      .menu-list-kcal {
-        font-size: 10px;
-        letter-spacing: 2px;
-        color: var(--muted);
-        text-transform: uppercase;
-      }
-
-      /* ── HERO ITEM (large featured) ── */
-      .menu-hero-item {
+      .two-col-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        min-height: 420px;
-        overflow: hidden;
-        margin-bottom: 2px;
-      }
-      .menu-hero-img {
-        width: 100%;
-        height: 100%;
-        min-height: 420px;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.6s ease;
-        background: linear-gradient(135deg, #e8e0d0 0%, #d4c9b5 100%);
-      }
-      .menu-hero-item:hover .menu-hero-img {
-        transform: scale(1.04);
-      }
-      .menu-hero-content {
-        background: var(--navy);
-        padding: 60px 50px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-      .menu-hero-label {
-        font-size: 10px;
-        letter-spacing: 5px;
-        text-transform: uppercase;
-        color: var(--gold);
-        margin-bottom: 20px;
-      }
-      .menu-hero-name {
-        font-family: "Playfair Display", serif;
-        font-size: 40px;
-        color: var(--cream);
-        line-height: 1.1;
-        margin-bottom: 16px;
-      }
-      .menu-hero-desc {
-        font-family: "Cormorant Garamond", serif;
-        font-size: 18px;
-        font-style: italic;
-        color: rgba(245, 240, 232, 0.6);
-        line-height: 1.7;
-        margin-bottom: 32px;
-      }
-      .menu-hero-footer {
-        display: flex;
-        align-items: center;
-        gap: 24px;
-      }
-      .menu-hero-price {
-        font-family: "Playfair Display", serif;
-        font-size: 36px;
-        color: var(--gold);
-      }
-      .menu-hero-kcal {
-        font-size: 10px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: rgba(245, 240, 232, 0.4);
+        gap: 40px;
       }
 
-      /* ── DRINK CARDS ── */
-      .drinks-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 2px;
-      }
-      .drink-card {
-        background: var(--navy);
-        padding: 36px 28px;
-        position: relative;
-        overflow: hidden;
-        transition: background 0.3s;
-        cursor: pointer;
-      }
-      .drink-card:hover {
-        background: #243766;
-      }
-      .drink-card-img-wrap {
-        overflow: hidden;
-        margin: -36px -28px 28px;
-        position: relative;
-        height: 180px;
-      }
-      .drink-card-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.6s;
-        background: linear-gradient(135deg, #2a3f6a 0%, #1c2b4a 100%);
-      }
-      .drink-card:hover .drink-card-img {
-        transform: scale(1.05);
-      }
-      .drink-card-num {
-        font-family: "Playfair Display", serif;
-        font-size: 48px;
-        color: rgba(201, 169, 110, 0.15);
-        font-weight: 700;
-        line-height: 1;
-        margin-bottom: 16px;
-      }
-      .drink-card-name {
-        font-family: "Playfair Display", serif;
-        font-size: 18px;
-        color: var(--cream);
-        margin-bottom: 8px;
-        line-height: 1.2;
-      }
-      .drink-card-desc {
-        font-family: "Cormorant Garamond", serif;
-        font-size: 15px;
-        color: rgba(245, 240, 232, 0.5);
-        font-style: italic;
-        line-height: 1.6;
-        margin-bottom: 20px;
-      }
-      .drink-card-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-      }
-      .drink-card-price {
-        font-family: "Playfair Display", serif;
-        font-size: 22px;
-        color: var(--gold);
-      }
-      .drink-card-kcal {
-        font-size: 10px;
-        letter-spacing: 2px;
-        color: rgba(245, 240, 232, 0.3);
-        text-transform: uppercase;
+      /* ═══════════════════════════════════════════════════
+       RESPONSIVE — TABLET (max 1024px)
+    ═══════════════════════════════════════════════════ */
+      @media (max-width: 1024px) {
+        .stats-inner {
+          gap: 0;
+        }
+        .menu-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
+        }
+        .drinks-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .footer-grid {
+          grid-template-columns: 1.2fr 1fr 1fr;
+          gap: 40px;
+        }
+        .feature-banner {
+          padding: 44px 48px;
+        }
+        .feature-price {
+          font-size: 48px;
+        }
       }
 
-      /* ── SUBSECTION HEADING ── */
-      .sub-heading {
-        font-family: "Playfair Display", serif;
-        font-size: 28px;
-        color: var(--navy);
-        margin-bottom: 32px;
-        padding-bottom: 14px;
-        position: relative;
-        letter-spacing: -0.5px;
-      }
-      .sub-heading::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 52px;
-        height: 2px;
-        background: linear-gradient(to right, var(--gold), transparent);
-      }
-      .sub-heading em {
-        font-style: italic;
-        color: var(--warm);
-      }
+      /* ═══════════════════════════════════════════════════
+       RESPONSIVE — TABLET PORTRAIT (max 900px)
+    ═══════════════════════════════════════════════════ */
+      @media (max-width: 900px) {
+        /* Stats */
+        .stats-inner {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .stat + .stat:nth-child(3)::before {
+          display: none;
+        }
+        .stat-num {
+          font-size: 28px;
+        }
 
-      /* ── FOOTER ── */
-      .footer {
-        background: var(--navy);
-        padding: 60px 40px;
-        text-align: center;
-        position: relative;
-      }
-      .footer::before {
-        content: "";
-        display: block;
-        width: 100px;
-        height: 1px;
-        background: linear-gradient(
-          to right,
-          transparent,
-          var(--gold),
-          transparent
-        );
-        margin: 0 auto 48px;
-        opacity: 0.5;
-      }
-      .footer-logo {
-        font-family: "Playfair Display", serif;
-        font-size: 36px;
-        color: var(--gold);
-        letter-spacing: -1px;
-        margin-bottom: 12px;
-      }
-      .footer-logo span {
-        font-style: italic;
-      }
-      .footer-text {
-        font-size: 11px;
-        letter-spacing: 4px;
-        text-transform: uppercase;
-        color: rgba(245, 240, 232, 0.3);
-      }
-
-      /* ── UTILITY ── */
-      .sar {
-        font-size: 13px;
-        font-family: "Jost", sans-serif;
-        font-weight: 300;
-        vertical-align: super;
-        margin-right: 2px;
-      }
-      .arabic {
-        font-size: 13px;
-        color: var(--muted);
-        direction: rtl;
-        margin-top: 4px;
-        letter-spacing: 0;
-      }
-
-      @media (max-width: 768px) {
-        .hero {
-          justify-content: flex-start;
-          padding-top: 25vh;
-        }
-        .container {
-          padding: 0 20px;
-        }
-        .section {
-          padding: 60px 0 40px;
-        }
-        .section-number {
-          font-size: 70px;
-        }
-        .section-title {
-          font-size: 36px;
-        }
+        /* Hero featured item — stack vertically */
         .menu-hero-item {
           grid-template-columns: 1fr;
+          border-radius: 16px;
         }
         .menu-hero-img {
-          min-height: 280px;
+          min-height: 240px;
         }
-        .hero-title {
-          font-size: 56px;
+        .menu-hero-content {
+          padding: 36px 32px;
         }
-        .nav {
-          padding: 0 20px;
+        .menu-hero-name {
+          font-size: 28px;
         }
-        .menu-grid {
-          grid-template-columns: 1fr 1fr;
-          gap: 10px;
+        .menu-hero-price {
+          font-size: 28px;
         }
-      }
-      @media (max-width: 520px) {
-        .menu-grid {
+
+        /* Feature banner */
+        .feature-banner {
           grid-template-columns: 1fr;
-          gap: 10px;
+          text-align: center;
+          padding: 44px 36px;
+          gap: 24px;
         }
-      }
-      .hero-logo {
-        width: 130px;
-        margin-bottom: 28px;
-        opacity: 0.92;
-        filter: drop-shadow(0 0 24px rgba(201, 169, 110, 0.35));
-      }
-      @media (max-width: 768px) {
+        .feature-price-block {
+          text-align: center;
+        }
+        .feature-price {
+          font-size: 52px;
+        }
+        .feature-banner-title {
+          font-size: 32px;
+        }
+
+        /* Two column → single */
         .two-col-grid {
           grid-template-columns: 1fr !important;
+          gap: 32px;
+        }
+
+        /* Footer */
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 36px;
+        }
+
+        /* Section headers */
+        .section-num {
+          font-size: 72px;
+        }
+        .section-title {
+          font-size: 38px;
+        }
+
+        /* Drinks */
+        .drinks-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* ═══════════════════════════════════════════════════
+       RESPONSIVE — MOBILE LANDSCAPE / LARGE PHONES (max 768px)
+    ═══════════════════════════════════════════════════ */
+      @media (max-width: 768px) {
+        /* Global */
+        .container {
+          padding: 0 16px;
+        }
+        .section {
+          padding: 56px 0 36px;
+        }
+
+        /* Hero */
+        .hero {
+          min-height: 100svh;
+          padding: 0 20px;
+        }
+        .hero-title {
+          letter-spacing: -1.5px;
+        }
+        .hero-title .line1 {
+          font-size: 0.88em;
+        }
+        .hero-corner {
+          width: 100px;
+          height: 100px;
+        }
+        .hero-badge {
+          font-size: 9px;
+          letter-spacing: 3px;
+          padding: 7px 16px;
+        }
+        .hero-sub {
+          font-size: 12px;
+        }
+        .hero-divider {
+          margin: 28px auto;
+        }
+        .hero-cta-row {
+          gap: 12px;
+        }
+        .btn-primary,
+        .btn-secondary {
+          padding: 13px 24px;
+          font-size: 11px;
+        }
+
+        /* Stats */
+        .stats-bar {
+          padding: 20px 0;
+        }
+        .stats-inner {
+          padding: 0 16px;
+          gap: 0;
+        }
+        .stat {
+          padding: 0 12px;
+        }
+        .stat-num {
+          font-size: 26px;
+        }
+        .stat-label {
+          font-size: 9px;
+          letter-spacing: 1.5px;
+        }
+
+        /* Nav */
+        .nav-wrap {
+        }
+        .nav {
+          padding: 0 16px;
+          gap: 0;
+        }
+        .nav-logo {
+          font-size: 15px;
+          padding-right: 16px;
+          margin-right: 8px;
+        }
+        .nav-item {
+          padding: 16px 12px;
+          font-size: 9px;
+          letter-spacing: 1.5px;
+        }
+
+        /* Section headers */
+        .section-header {
+          gap: 16px;
+          margin-bottom: 44px;
+          align-items: flex-end;
+        }
+        .section-num {
+          font-size: 56px;
+        }
+        .section-title {
+          font-size: 32px;
+          letter-spacing: -0.5px;
+        }
+        .section-label {
+          font-size: 9px;
+          letter-spacing: 4px;
+        }
+        .section-line {
+          display: none;
+        }
+
+        /* Menu list */
+        .menu-list-grid {
+          grid-template-columns: 1fr;
+        }
+        .menu-list-item {
+          padding: 18px 14px;
+        }
+        .menu-list-name {
+          font-size: 15px;
+        }
+        .menu-list-desc {
+          font-size: 11px;
+        }
+        .menu-list-price {
+          font-size: 16px;
+        }
+        .item-icon {
+          width: 32px;
+          height: 32px;
+          font-size: 14px;
+          border-radius: 6px;
+          flex-shrink: 0;
+        }
+
+        /* Menu cards — 2 column on tablet-mobile */
+        .menu-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+          margin-bottom: 24px;
+        }
+        .menu-card-img {
+          height: 160px;
+        }
+        .menu-card-body {
+          padding: 14px 14px 16px;
+        }
+        .menu-card-name {
+          font-size: 14px;
+          margin-bottom: 4px;
+        }
+        .menu-card-desc {
+          font-size: 11px;
+          margin-bottom: 10px;
+        }
+        .menu-card-badge {
+          font-size: 14px;
+          padding: 5px 10px;
+        }
+
+        /* Hero item */
+        .menu-hero-item {
+          border-radius: 14px;
+          margin-bottom: 24px;
+        }
+        .menu-hero-img {
+          min-height: 200px;
+        }
+        .menu-hero-content {
+          padding: 28px 24px;
+        }
+        .menu-hero-name {
+          font-size: 24px;
+        }
+        .menu-hero-desc {
+          font-size: 13px;
+          margin-bottom: 20px;
+        }
+        .menu-hero-price {
+          font-size: 26px;
+        }
+
+        /* Drinks */
+        .drinks-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+        }
+        .drink-card-img-wrap {
+          height: 130px;
+        }
+        .drink-card-body {
+          padding: 14px 14px 16px;
+        }
+        .drink-card-name {
+          font-size: 13px;
+        }
+        .drink-card-desc {
+          font-size: 11px;
+          margin-bottom: 10px;
+        }
+        .drink-card-price {
+          font-size: 16px;
+        }
+
+        /* Sub heading */
+        .sub-heading {
+          font-size: 22px;
+          margin-bottom: 20px;
+        }
+
+        /* Feature banner */
+        .feature-banner {
+          padding: 32px 24px;
+          border-radius: 14px;
+          margin: 40px 0;
+        }
+        .feature-banner-title {
+          font-size: 26px;
+        }
+        .feature-banner-sub {
+          font-size: 13px;
+        }
+        .feature-price {
+          font-size: 44px;
+        }
+
+        /* Two column */
+        .two-col-grid {
+          grid-template-columns: 1fr !important;
+          gap: 28px;
+        }
+
+        /* Footer */
+        .footer {
+          padding: 56px 16px 28px;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 32px;
+          margin-bottom: 40px;
+        }
+        .footer-logo-text {
+          font-size: 28px;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          gap: 8px;
+          text-align: center;
+        }
+        .footer-copy,
+        .footer-vat {
+          font-size: 11px;
+        }
+      }
+
+      /* ═══════════════════════════════════════════════════
+       RESPONSIVE — SMALL MOBILE (max 480px)
+    ═══════════════════════════════════════════════════ */
+      @media (max-width: 480px) {
+        /* Hero */
+        .hero-corner {
+          width: 70px;
+          height: 70px;
+          top: 16px;
+          left: 16px;
+        }
+        .hero-corner-br {
+          bottom: 16px;
+          right: 16px;
+        }
+        .hero-badge {
+          font-size: 8px;
+          letter-spacing: 2px;
+          padding: 6px 12px;
+        }
+        .hero-cta-row {
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+        }
+        .btn-primary,
+        .btn-secondary {
+          width: 100%;
+          max-width: 280px;
+          justify-content: center;
+        }
+        .scroll-indicator {
+          bottom: 20px;
+        }
+
+        /* Stats — 2x2 compact */
+        .stats-inner {
+          grid-template-columns: 1fr 1fr;
+        }
+        .stat {
+          padding: 12px 8px;
+        }
+        .stat-num {
+          font-size: 22px;
+        }
+        .stat-label {
+          font-size: 8px;
+          letter-spacing: 1px;
+        }
+
+        /* Nav */
+        .nav-logo {
+          display: none;
+        }
+        .nav-item {
+          padding: 14px 10px;
+          font-size: 8.5px;
+          letter-spacing: 1px;
+        }
+
+        /* Section */
+        .section-num {
+          font-size: 44px;
+        }
+        .section-title {
+          font-size: 26px;
+        }
+        .section-header {
+          gap: 12px;
+          margin-bottom: 32px;
+        }
+
+        /* Cards — single column */
+        .menu-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        .menu-card-img {
+          height: 200px;
+        }
+        .menu-card-body {
+          padding: 16px 16px 18px;
+        }
+        .menu-card-name {
+          font-size: 16px;
+        }
+        .menu-card-desc {
+          font-size: 12px;
+        }
+
+        /* Drinks — single column */
+        .drinks-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        .drink-card-img-wrap {
+          height: 160px;
+        }
+
+        /* List items */
+        .menu-list-item {
+          padding: 16px 10px;
+          gap: 12px;
+        }
+        .item-icon {
+          width: 30px;
+          height: 30px;
+          font-size: 13px;
+        }
+        .menu-list-name {
+          font-size: 14px;
+        }
+        .menu-list-desc {
+          font-size: 11px;
+        }
+
+        /* Hero item */
+        .menu-hero-img {
+          min-height: 180px;
+        }
+        .menu-hero-content {
+          padding: 24px 20px;
+        }
+        .menu-hero-name {
+          font-size: 22px;
+        }
+        .menu-hero-price {
+          font-size: 24px;
+        }
+
+        /* Feature banner */
+        .feature-banner {
+          padding: 28px 20px;
+          margin: 32px 0;
+        }
+        .feature-banner-title {
+          font-size: 22px;
+        }
+        .feature-price {
+          font-size: 38px;
+        }
+
+        /* Sub heading */
+        .sub-heading {
+          font-size: 20px;
+        }
+
+        /* Footer */
+        .footer {
+          padding: 44px 16px 24px;
+        }
+        .footer-logo-text {
+          font-size: 24px;
+        }
+        .footer-desc {
+          font-size: 13px;
+        }
+      }
+
+      /* ═══════════════════════════════════════════════════
+       RESPONSIVE — VERY SMALL (max 360px)
+    ═══════════════════════════════════════════════════ */
+      @media (max-width: 360px) {
+        .hero-title {
+          letter-spacing: -1px;
+        }
+        .hero-badge {
+          font-size: 7.5px;
+        }
+        .section-title {
+          font-size: 22px;
+        }
+        .nav-item {
+          padding: 13px 8px;
+          font-size: 8px;
+        }
+        .btn-primary,
+        .btn-secondary {
+          padding: 12px 20px;
+          font-size: 10px;
+        }
+        .stat-num {
+          font-size: 20px;
+        }
+        .feature-banner-title {
+          font-size: 20px;
+        }
+        .feature-price {
+          font-size: 32px;
+        }
+      }
+
+      /* ═══════════════════════════════════════════════════
+       TOUCH DEVICES — disable hover transforms for perf
+    ═══════════════════════════════════════════════════ */
+      @media (hover: none) {
+        .menu-card:hover,
+        .drink-card:hover,
+        .menu-hero-item:hover,
+        .btn-primary:hover,
+        .btn-secondary:hover {
+          transform: none;
+        }
+        .menu-card:hover .menu-card-img,
+        .drink-card:hover .drink-card-img,
+        .menu-hero-item:hover .menu-hero-img {
+          transform: none;
+        }
+        .menu-list-item::before {
+          display: none;
         }
       }
     </style>
@@ -672,37 +1718,100 @@
   <body>
     <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
     <section class="hero">
-      <div class="hero-line"></div>
-      <p class="hero-subtitle">Riyadh · Est. 2025</p>
-      <h1 class="hero-title">Midtown<span>Street Café</span></h1>
-      <p class="hero-tagline">An experience crafted with care</p>
-      <div class="hero-bottom">
-        <div class="hero-bottom-line"></div>
-        <span class="scroll-text">Scroll to explore</span>
-        <div class="hero-bottom-line"></div>
+      <div class="hero-grid"></div>
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="hero-corner hero-corner-tl"></div>
+      <div class="hero-corner hero-corner-br"></div>
+      <div class="scanline"></div>
+
+      <div class="hero-inner">
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          Riyadh · Est. 2026 · Now Open
+        </div>
+        <h1 class="hero-title">
+          <span class="line1">Midtown</span>
+          <span class="line2">Street</span>
+          <span class="line3">Café</span>
+        </h1>
+        <div class="hero-divider"></div>
+        <p class="hero-sub">The taste you’ll remember.</p>
+        <div class="hero-cta-row">
+          <a
+            href="#coffees"
+            class="btn-primary"
+            onclick="smoothScroll('coffees')"
+          >
+            ☕ Explore Menu
+          </a>
+          <a
+            href="#starters"
+            class="btn-secondary"
+            onclick="smoothScroll('starters')"
+          >
+            🍔 View Food
+          </a>
+        </div>
+      </div>
+
+      <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
       </div>
     </section>
 
+    <!-- ─── STATS BAR ─── -->
+    <div class="stats-bar">
+      <div class="stats-inner">
+        <div class="stat">
+          <div class="stat-num">11+</div>
+          <div class="stat-label">Menu Categories</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">60+</div>
+          <div class="stat-label">Unique Items</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">4</div>
+          <div class="stat-label">SAR</div>
+          <div class="stat-label">Starting From</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Halal Certified</div>
+        </div>
+      </div>
+    </div>
+
     <!-- ═══════════════════════════════ NAV ════════════════════════════════ -->
-    <nav class="nav" id="mainNav">
-      <div class="nav-item active" onclick="scrollToSection('coffees')">
-        Coffees
-      </div>
-      <div class="nav-item" onclick="scrollToSection('teas')">Teas</div>
-      <div class="nav-item" onclick="scrollToSection('starters')">Starters</div>
-      <div class="nav-item" onclick="scrollToSection('burgers')">Burgers</div>
-      <div class="nav-item" onclick="scrollToSection('sandwiches')">
-        Sandwiches
-      </div>
-      <div class="nav-item" onclick="scrollToSection('shawarma')">Shawarma</div>
-      <div class="nav-item" onclick="scrollToSection('mains')">Mains</div>
-      <div class="nav-item" onclick="scrollToSection('pasta')">
-        Pasta &amp; Salads
-      </div>
-      <div class="nav-item" onclick="scrollToSection('drinks')">Drinks</div>
-      <div class="nav-item" onclick="scrollToSection('shakes')">Shakes</div>
-      <div class="nav-item" onclick="scrollToSection('fruitpunch')">
-        Fruit Punch
+    <nav class="nav-wrap">
+      <div class="nav" id="mainNav">
+        <div class="nav-logo">Mid<span>town</span></div>
+        <div class="nav-item active" onclick="scrollToSection('coffees')">
+          Coffees
+        </div>
+        <div class="nav-item" onclick="scrollToSection('teas')">Teas</div>
+        <div class="nav-item" onclick="scrollToSection('starters')">
+          Starters
+        </div>
+        <div class="nav-item" onclick="scrollToSection('burgers')">Burgers</div>
+        <div class="nav-item" onclick="scrollToSection('sandwiches')">
+          Sandwiches
+        </div>
+        <div class="nav-item" onclick="scrollToSection('shawarma')">
+          Shawarma
+        </div>
+        <div class="nav-item" onclick="scrollToSection('mains')">Mains</div>
+        <div class="nav-item" onclick="scrollToSection('pasta')">
+          Pasta &amp; Salads
+        </div>
+        <div class="nav-item" onclick="scrollToSection('drinks')">Drinks</div>
+        <div class="nav-item" onclick="scrollToSection('shakes')">Shakes</div>
+        <div class="nav-item" onclick="scrollToSection('fruitpunch')">
+          Fruit Punch
+        </div>
       </div>
     </nav>
 
@@ -710,17 +1819,16 @@
     <section class="section" id="coffees">
       <div class="container">
         <div class="section-header">
-          <div class="section-number">01</div>
+          <div class="section-num">01</div>
           <div class="section-title-block">
             <p class="section-label">Morning &amp; Beyond</p>
             <h2 class="section-title">Cof<em>fees</em></h2>
           </div>
-          <div class="section-divider"></div>
+          <div class="section-line"></div>
         </div>
-
-        <!-- All coffees as list — no photo items in this section -->
         <div class="menu-list-grid">
           <div class="menu-list-item">
+            <div class="item-icon">☕</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Cappuccino</div>
               <div class="menu-list-desc">
@@ -735,6 +1843,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">☕</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Cafe Latte</div>
               <div class="menu-list-desc">Smooth, milky espresso blend</div>
@@ -746,6 +1855,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">⚡</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Espresso</div>
               <div class="menu-list-desc">Intense, pure coffee shot</div>
@@ -757,6 +1867,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍫</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Hot Milo</div>
               <div class="menu-list-desc">Warm, malty cocoa comfort</div>
@@ -768,6 +1879,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍫</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Chocolate Blend</div>
               <div class="menu-list-desc">Rich, melted cocoa fusion</div>
@@ -779,6 +1891,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🧊</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Cold Coffee</div>
               <div class="menu-list-desc">
@@ -792,6 +1905,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">☕</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Chocolate Ice Coffee</div>
               <div class="menu-list-desc">Decadent, iced cocoa brew</div>
@@ -810,16 +1924,14 @@
     <section class="section section-alt" id="teas">
       <div class="container">
         <div class="section-header">
-          <div class="section-number">02</div>
+          <div class="section-num">02</div>
           <div class="section-title-block">
             <p class="section-label">Warm &amp; Chilled</p>
             <h2 class="section-title"><em>Tea</em> Selection</h2>
           </div>
-          <div class="section-divider"></div>
+          <div class="section-line"></div>
         </div>
-
-        <!-- Iced Lemon Tea has a photo -->
-        <div class="menu-grid" style="margin-bottom: 2px">
+        <div class="menu-grid">
           <div class="menu-card">
             <div class="menu-card-img-wrap">
               <img
@@ -827,28 +1939,23 @@
                 alt="Iced Lemon Tea"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >12
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>12</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">Iced Lemon Tea</div>
               <div class="menu-card-desc">Chilled, tangy summer refresher</div>
               <div class="menu-card-footer">
                 <div class="menu-card-kcal">90 kcal</div>
+                <div class="tag">Featured</div>
               </div>
               <div class="arabic">شاي مثلج بالليمون</div>
             </div>
           </div>
         </div>
-
-        <!-- Remaining teas as list -->
-        <div class="menu-list-grid" style="margin-top: 40px">
+        <div class="menu-list-grid">
           <div class="menu-list-item">
+            <div class="item-icon">🍵</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Karak Tea</div>
               <div class="menu-list-desc">Spiced, creamy traditional brew</div>
@@ -860,6 +1967,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍉</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Watermelon Iced Tea</div>
               <div class="menu-list-desc">Sweet, fruity garden chill</div>
@@ -871,6 +1979,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍓</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Strawberry Iced Tea</div>
               <div class="menu-list-desc">Luscious, sweet berry blend</div>
@@ -882,6 +1991,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍊</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Orange Iced Tea</div>
               <div class="menu-list-desc">Bright, citrusy sunshine sip</div>
@@ -893,6 +2003,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍵</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Black Tea</div>
               <div class="menu-list-desc">Bold, simple classic steep</div>
@@ -904,6 +2015,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🥛</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Fresh Milk Tea</div>
               <div class="menu-list-desc">
@@ -924,16 +2036,14 @@
     <section class="section" id="starters">
       <div class="container">
         <div class="section-header">
-          <div class="section-number">03</div>
+          <div class="section-num">03</div>
           <div class="section-title-block">
             <p class="section-label">Begin Your Journey</p>
             <h2 class="section-title">Appe<em>tisers</em></h2>
           </div>
-          <div class="section-divider"></div>
+          <div class="section-line"></div>
         </div>
-
-        <!-- Photo items: Dynamite Fries, Sausage Platter, Crunchy Cocktail Shrimp -->
-        <div class="menu-grid" style="margin-bottom: 2px">
+        <div class="menu-grid">
           <div class="menu-card">
             <div class="menu-card-img-wrap">
               <img
@@ -941,13 +2051,8 @@
                 alt="Dynamite Fries"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >20
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>20</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">Dynamite Fries</div>
@@ -967,13 +2072,8 @@
                 alt="Sausage Platter"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >27
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>27</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">Sausage Platter</div>
@@ -992,75 +2092,72 @@
                 alt="Crunchy Cocktail Shrimp"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >28
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>26</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">Crunchy Cocktail Shrimp</div>
               <div class="menu-card-desc">
-                Juicy shrimp in creamy, spicy mayo
+                Crispy, golden-fried shrimp bites
               </div>
               <div class="menu-card-footer">
-                <div class="menu-card-kcal">600 kcal</div>
+                <div class="menu-card-kcal">460 kcal</div>
               </div>
               <div class="arabic">روبيان كوكتيل مقرمش</div>
             </div>
           </div>
         </div>
-
-        <!-- Remaining starters as list -->
-        <div class="menu-list-grid" style="margin-top: 40px">
+        <div class="menu-list-grid">
           <div class="menu-list-item">
+            <div class="item-icon">🍟</div>
             <div class="menu-list-content">
-              <div class="menu-list-name">Veg Nuggets</div>
+              <div class="menu-list-name">Crispy Fries</div>
               <div class="menu-list-desc">
-                Crispy vegetable bites, lightly seasoned
+                Golden, seasoned potato perfection
               </div>
-              <div class="arabic">قطع خضار مقلية</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>8</div>
-              <div class="menu-list-kcal">250 kcal</div>
-            </div>
-          </div>
-          <div class="menu-list-item">
-            <div class="menu-list-content">
-              <div class="menu-list-name">French Fries</div>
-              <div class="menu-list-desc">Crispy golden potato fries</div>
               <div class="arabic">بطاطس مقلية</div>
             </div>
             <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>9</div>
-              <div class="menu-list-kcal">870 kcal</div>
+              <div class="menu-list-price"><span class="sar">SAR</span>10</div>
+              <div class="menu-list-kcal">370 kcal</div>
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍗</div>
             <div class="menu-list-content">
-              <div class="menu-list-name">Chicken Nuggets (9 pcs)</div>
-              <div class="menu-list-desc">Crispy battered chicken bites</div>
-              <div class="arabic">قطع دجاج مقلية</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>14</div>
-              <div class="menu-list-kcal">420 kcal</div>
-            </div>
-          </div>
-          <div class="menu-list-item">
-            <div class="menu-list-content">
-              <div class="menu-list-name">Cheesy Fries</div>
+              <div class="menu-list-name">Chicken Popcorn</div>
               <div class="menu-list-desc">
-                Fries topped with mozzarella cheese
+                Crispy bite-sized chicken morsels
               </div>
-              <div class="arabic">بطاطس بالجبنة</div>
+              <div class="arabic">دجاج بوبكورن</div>
             </div>
             <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>14</div>
-              <div class="menu-list-kcal">1300 kcal</div>
+              <div class="menu-list-price"><span class="sar">SAR</span>18</div>
+              <div class="menu-list-kcal">430 kcal</div>
+            </div>
+          </div>
+          <div class="menu-list-item">
+            <div class="item-icon">🥚</div>
+            <div class="menu-list-content">
+              <div class="menu-list-name">Scrambled Eggs</div>
+              <div class="menu-list-desc">Soft, fluffy egg medley</div>
+              <div class="arabic">بيض مخفوق</div>
+            </div>
+            <div class="menu-list-right">
+              <div class="menu-list-price"><span class="sar">SAR</span>8</div>
+              <div class="menu-list-kcal">240 kcal</div>
+            </div>
+          </div>
+          <div class="menu-list-item">
+            <div class="item-icon">🥗</div>
+            <div class="menu-list-content">
+              <div class="menu-list-name">Garlic Bread</div>
+              <div class="menu-list-desc">Toasted, buttery garlic classic</div>
+              <div class="arabic">خبز بالثوم</div>
+            </div>
+            <div class="menu-list-right">
+              <div class="menu-list-price"><span class="sar">SAR</span>8</div>
+              <div class="menu-list-kcal">320 kcal</div>
             </div>
           </div>
         </div>
@@ -1071,16 +2168,44 @@
     <section class="section section-alt" id="burgers">
       <div class="container">
         <div class="section-header">
-          <div class="section-number">04</div>
+          <div class="section-num">04</div>
           <div class="section-title-block">
-            <p class="section-label">Stack &amp; Savour</p>
+            <p class="section-label">Stacked &amp; Loaded</p>
             <h2 class="section-title">Bur<em>gers</em></h2>
           </div>
-          <div class="section-divider"></div>
+          <div class="section-line"></div>
         </div>
 
-        <!-- Photo items: Italian Slider, Zinger Burger, MT 2.0 -->
-        <div class="menu-grid" style="margin-bottom: 2px">
+        <!-- Featured Burger -->
+        <div class="menu-hero-item">
+          <div class="menu-hero-img-wrap">
+            <img
+              src="food-photos/BURGERS/drop%20burger/drop%20burger.png"
+              alt="Drop Burger"
+              class="menu-hero-img"
+            />
+          </div>
+          <div class="menu-hero-content">
+            <div class="menu-hero-label">⭐ Chef's Signature</div>
+            <div class="menu-hero-name">Drop Burger</div>
+            <div class="menu-hero-desc">
+              Juicy beef patty with melted cheese, fresh lettuce, tomato &amp;
+              signature sauce
+            </div>
+            <div class="menu-hero-footer">
+              <div class="menu-hero-price">
+                <span
+                  class="sar"
+                  style="font-size: 14px; color: var(--brown-light)"
+                  >SAR</span
+                >35
+              </div>
+              <div class="menu-hero-kcal">560 kcal</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-grid">
           <div class="menu-card">
             <div class="menu-card-img-wrap">
               <img
@@ -1088,13 +2213,8 @@
                 alt="Italian Slider"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >25
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>25</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">Italian Slider</div>
@@ -1114,13 +2234,8 @@
                 alt="Zinger Burger"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >21
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>21</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">Zinger Burger</div>
@@ -1137,17 +2252,12 @@
           <div class="menu-card">
             <div class="menu-card-img-wrap">
               <img
-                src="food-photos/OUR%20SIGNATURE%20BLEND/MT2.0/MT%202.0.jpeg"
+                src="food-photos/OUR%20SIGNATURE%20BLEND/MT2.0/MT%202.0.png"
                 alt="MT 2.0"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >34
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>34</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">MT 2.0</div>
@@ -1162,22 +2272,9 @@
           </div>
         </div>
 
-        <!-- Remaining burgers as list -->
-        <div class="menu-list-grid" style="margin-top: 40px">
+        <div class="menu-list-grid">
           <div class="menu-list-item">
-            <div class="menu-list-content">
-              <div class="menu-list-name">Drop Burger</div>
-              <div class="menu-list-desc">
-                Juicy beef patty with melted cheese, fresh lettuce, tomato &amp;
-                signature sauce
-              </div>
-              <div class="arabic">دروب برغر</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>35</div>
-            </div>
-          </div>
-          <div class="menu-list-item">
+            <div class="item-icon">🍔</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Classic Chicken</div>
               <div class="menu-list-desc">
@@ -1191,6 +2288,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍔</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Chicken Steak Burger</div>
               <div class="menu-list-desc">
@@ -1204,6 +2302,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍔</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Gourmet Chicken</div>
               <div class="menu-list-desc">
@@ -1217,6 +2316,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🥩</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Smashed Wagyu Burger</div>
               <div class="menu-list-desc">
@@ -1238,65 +2338,50 @@
     <section class="section" id="sandwiches">
       <div class="container">
         <div class="section-header">
-          <div class="section-number">05</div>
+          <div class="section-num">05</div>
           <div class="section-title-block">
             <p class="section-label">Club &amp; Long</p>
             <h2 class="section-title">Sand<em>wiches</em></h2>
           </div>
-          <div class="section-divider"></div>
+          <div class="section-line"></div>
         </div>
 
-        <div
-          class="two-col-grid"
-          style="
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 16px;
-          "
-        >
-          <!-- Club Sandwich -->
+        <div class="two-col-grid">
           <div>
             <h3 class="sub-heading">Club <em>Sandwich</em></h3>
-            <div class="menu-list-grid" style="grid-template-columns: 1fr">
-              <!-- Steak Club has a photo -->
-              <div style="margin-bottom: 20px">
-                <div class="menu-card" style="max-width: 100%">
-                  <div class="menu-card-img-wrap">
-                    <img
-                      src="food-photos/CLUB%20SANDWICHES/steak%20club/steak%20club.png"
-                      alt="Steak Club"
-                      class="menu-card-img"
-                      style="height: 200px"
-                    />
-                    <div class="menu-card-badge">
-                      <span
-                        class="sar"
-                        style="font-size: 11px; color: var(--gold-light)"
-                        >SAR</span
-                      >29
-                    </div>
-                  </div>
-                  <div class="menu-card-body">
-                    <div class="menu-card-name">Steak Club</div>
-                    <div class="menu-card-desc">
-                      Juicy steak, creamy mayo &amp; melted cheese
-                    </div>
-                    <div class="menu-card-footer">
-                      <div class="menu-card-kcal">1030 kcal</div>
-                    </div>
-                    <div class="arabic">نادي ستيك</div>
-                  </div>
+            <div class="menu-card" style="margin-bottom: 20px">
+              <div class="menu-card-img-wrap">
+                <img
+                  src="food-photos/CLUB%20SANDWICHES/steak%20club/steak%20club.png"
+                  alt="Steak Club"
+                  class="menu-card-img"
+                  style="height: 180px"
+                />
+                <div class="menu-card-img-overlay"></div>
+                <div class="menu-card-badge">
+                  <span class="sar">SAR</span>29
                 </div>
               </div>
-
+              <div class="menu-card-body">
+                <div class="menu-card-name">Steak Club</div>
+                <div class="menu-card-desc">
+                  Juicy steak, creamy mayo &amp; melted cheese
+                </div>
+                <div class="menu-card-footer">
+                  <div class="menu-card-kcal">1030 kcal</div>
+                </div>
+                <div class="arabic">نادي ستيك</div>
+              </div>
+            </div>
+            <div class="menu-list-grid" style="grid-template-columns: 1fr">
               <div class="menu-list-item">
+                <div class="item-icon">🥚</div>
                 <div class="menu-list-content">
                   <div class="menu-list-name">Egg Club</div>
                   <div class="menu-list-desc">
                     Egg, mayo, veggies &amp; melted cheese
                   </div>
-                  <div class="arabic" style="font-size: 12px">نادي البيض</div>
+                  <div class="arabic">نادي البيض</div>
                 </div>
                 <div class="menu-list-right">
                   <div class="menu-list-price">
@@ -1306,14 +2391,13 @@
                 </div>
               </div>
               <div class="menu-list-item">
+                <div class="item-icon">🍗</div>
                 <div class="menu-list-content">
                   <div class="menu-list-name">Classic Chicken Club</div>
                   <div class="menu-list-desc">
                     Chicken, lettuce, tomato &amp; mayo
                   </div>
-                  <div class="arabic" style="font-size: 12px">
-                    ساندويتش كلوب
-                  </div>
+                  <div class="arabic">ساندويتش كلوب</div>
                 </div>
                 <div class="menu-list-right">
                   <div class="menu-list-price">
@@ -1323,6 +2407,7 @@
                 </div>
               </div>
               <div class="menu-list-item">
+                <div class="item-icon">🍗</div>
                 <div class="menu-list-content">
                   <div class="menu-list-name">Zinger Club</div>
                   <div class="menu-list-desc">
@@ -1337,12 +2422,13 @@
                 </div>
               </div>
               <div class="menu-list-item">
+                <div class="item-icon">🌯</div>
                 <div class="menu-list-content">
                   <div class="menu-list-name">Shawarma Club</div>
                   <div class="menu-list-desc">
                     Chicken, mayo, cheese &amp; fresh veggies
                   </div>
-                  <div class="arabic" style="font-size: 12px">نادي شاورما</div>
+                  <div class="arabic">نادي شاورما</div>
                 </div>
                 <div class="menu-list-right">
                   <div class="menu-list-price">
@@ -1353,22 +2439,17 @@
               </div>
             </div>
           </div>
-
-          <!-- Long Sandwich -->
           <div>
             <h3 class="sub-heading">Long <em>Sandwich</em></h3>
             <div class="menu-list-grid" style="grid-template-columns: 1fr">
               <div class="menu-list-item">
-                <div
-                  class="menu-list-dot"
-                  style="background: var(--warm)"
-                ></div>
+                <div class="item-icon">🥚</div>
                 <div class="menu-list-content">
                   <div class="menu-list-name">Classic Egg</div>
                   <div class="menu-list-desc">
                     Baked potato with basil sauce
                   </div>
-                  <div class="arabic" style="font-size: 12px">بيض كلاسيكي</div>
+                  <div class="arabic">بيض كلاسيكي</div>
                 </div>
                 <div class="menu-list-right">
                   <div class="menu-list-price">
@@ -1377,58 +2458,45 @@
                 </div>
               </div>
               <div class="menu-list-item">
-                <div
-                  class="menu-list-dot"
-                  style="background: var(--warm)"
-                ></div>
+                <div class="item-icon">🌭</div>
                 <div class="menu-list-content">
                   <div class="menu-list-name">Sausage Sandwich</div>
                   <div class="menu-list-desc">
                     Chicken popcorn, french fries &amp; parmesan
                   </div>
-                  <div class="arabic" style="font-size: 12px">
-                    ساندويتش نقانق
-                  </div>
                 </div>
                 <div class="menu-list-right">
                   <div class="menu-list-price">
-                    <span class="sar">SAR</span>12
+                    <span class="sar">SAR</span>14
                   </div>
                 </div>
               </div>
               <div class="menu-list-item">
-                <div
-                  class="menu-list-dot"
-                  style="background: var(--warm)"
-                ></div>
+                <div class="item-icon">🍗</div>
                 <div class="menu-list-content">
-                  <div class="menu-list-name">Olaya Time</div>
+                  <div class="menu-list-name">Zinger Long</div>
                   <div class="menu-list-desc">
-                    Grass-fed beef with barbeque sauce
+                    Crispy chicken with house sauces
                   </div>
-                  <div class="arabic" style="font-size: 12px">وقت العليا</div>
                 </div>
                 <div class="menu-list-right">
                   <div class="menu-list-price">
-                    <span class="sar">SAR</span>12
+                    <span class="sar">SAR</span>21
                   </div>
                 </div>
               </div>
               <div class="menu-list-item">
-                <div
-                  class="menu-list-dot"
-                  style="background: var(--warm)"
-                ></div>
+                <div class="item-icon">🥩</div>
                 <div class="menu-list-content">
-                  <div class="menu-list-name">Sultan</div>
-                  <div class="menu-list-desc">Royal, premium spiced blend</div>
-                  <div class="arabic" style="font-size: 12px">سلطان</div>
+                  <div class="menu-list-name">Steak Long</div>
+                  <div class="menu-list-desc">
+                    Tender beef steak, cheese &amp; sauces
+                  </div>
                 </div>
                 <div class="menu-list-right">
                   <div class="menu-list-price">
-                    <span class="sar">SAR</span>12
+                    <span class="sar">SAR</span>25
                   </div>
-                  <div class="menu-list-kcal">680 kcal</div>
                 </div>
               </div>
             </div>
@@ -1441,21 +2509,17 @@
     <section class="section section-alt" id="shawarma">
       <div class="container">
         <div class="section-header">
-          <div class="section-number">06</div>
+          <div class="section-num">06</div>
           <div class="section-title-block">
-            <p class="section-label">A Classic Reimagined</p>
+            <p class="section-label">Rolled to Perfection</p>
             <h2 class="section-title">Sha<em>warma</em></h2>
           </div>
-          <div class="section-divider"></div>
+          <div class="section-line"></div>
         </div>
 
-        <!-- All shawarma items as list — none have photos -->
         <div class="menu-list-grid">
           <div class="menu-list-item">
-            <div
-              class="menu-list-dot"
-              style="background: var(--red-accent)"
-            ></div>
+            <div class="item-icon">🌯</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Shawarma</div>
               <div class="menu-list-desc">Traditional, savory spiced wrap</div>
@@ -1467,10 +2531,7 @@
             </div>
           </div>
           <div class="menu-list-item">
-            <div
-              class="menu-list-dot"
-              style="background: var(--red-accent)"
-            ></div>
+            <div class="item-icon">🌯</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Hassan Mathar</div>
               <div class="menu-list-desc">Iconic, cheesy grilled favorite</div>
@@ -1482,10 +2543,7 @@
             </div>
           </div>
           <div class="menu-list-item">
-            <div
-              class="menu-list-dot"
-              style="background: var(--red-accent)"
-            ></div>
+            <div class="item-icon">🌯</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Arabic Shawarma</div>
               <div class="menu-list-desc">
@@ -1499,10 +2557,7 @@
             </div>
           </div>
           <div class="menu-list-item">
-            <div
-              class="menu-list-dot"
-              style="background: var(--red-accent)"
-            ></div>
+            <div class="item-icon">🌯</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Creamy Shawarma</div>
               <div class="menu-list-desc">Rich, velvety garlic fusion</div>
@@ -1514,10 +2569,7 @@
             </div>
           </div>
           <div class="menu-list-item">
-            <div
-              class="menu-list-dot"
-              style="background: var(--red-accent)"
-            ></div>
+            <div class="item-icon">🌯</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Shawarma Plate</div>
               <div class="menu-list-desc">Hearty, deconstructed meat feast</div>
@@ -1532,20 +2584,19 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════ MAINS ══════════════════════════════ -->
+    <!-- ══════════════════════════════ MAINS ═══════════════════════════════ -->
     <section class="section" id="mains">
       <div class="container">
         <div class="section-header">
-          <div class="section-number">07</div>
+          <div class="section-num">07</div>
           <div class="section-title-block">
-            <p class="section-label">The Heart of Our Kitchen</p>
-            <h2 class="section-title">Our <em>Specialities</em></h2>
+            <p class="section-label">Heartwarming Plates</p>
+            <h2 class="section-title">Main <em>Dishes</em></h2>
           </div>
-          <div class="section-divider"></div>
+          <div class="section-line"></div>
         </div>
 
-        <!-- Photo items: Chicken Bake, Beef Steak BBQ -->
-        <div class="menu-grid" style="margin-bottom: 2px">
+        <div class="menu-grid">
           <div class="menu-card">
             <div class="menu-card-img-wrap">
               <img
@@ -1553,13 +2604,8 @@
                 alt="Chicken Bake"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >28
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>28</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">Chicken Bake</div>
@@ -1579,13 +2625,8 @@
                 alt="Beef Steak BBQ"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >68
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>68</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">Beef Steak BBQ</div>
@@ -1601,9 +2642,9 @@
           </div>
         </div>
 
-        <!-- Remaining mains as list -->
-        <div class="menu-list-grid" style="margin-top: 40px">
+        <div class="menu-list-grid">
           <div class="menu-list-item">
+            <div class="item-icon">🦐</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Prawns Bake</div>
               <div class="menu-list-desc">
@@ -1617,6 +2658,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🥩</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Chicken Steak</div>
               <div class="menu-list-desc">
@@ -1631,6 +2673,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍳</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Chicken Sizzler</div>
               <div class="menu-list-desc">
@@ -1645,6 +2688,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🥩</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Beef Sizzler</div>
               <div class="menu-list-desc">
@@ -1659,6 +2703,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍫</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Sizzling Brownie</div>
               <div class="menu-list-desc">
@@ -1675,113 +2720,82 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════ PASTA & SALADS ═════════════════════════ -->
+    <!-- ══════════════════════════════ PASTA & SALADS ══════════════════════ -->
     <section class="section section-alt" id="pasta">
       <div class="container">
         <div class="section-header">
-          <div class="section-number">08</div>
+          <div class="section-num">08</div>
           <div class="section-title-block">
-            <p class="section-label">Italian &amp; Fresh</p>
+            <p class="section-label">Freshness on a Plate</p>
             <h2 class="section-title">Pasta &amp; <em>Salads</em></h2>
           </div>
-          <div class="section-divider"></div>
+          <div class="section-line"></div>
         </div>
 
-        <!-- Photo items: Flakes & Flames, Penne Ducale, Grilled Chicken Salad -->
-        <div class="menu-grid" style="margin-bottom: 40px">
-          <div class="menu-card">
-            <div class="menu-card-img-wrap">
-              <img
-                src="food-photos/PASTAS/flakes%20and%20flames%20pasta/flakes%20and%20flames%20pasta.png"
-                alt="Flakes and Flames Pasta"
-                class="menu-card-img"
-              />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >32/35
-              </div>
-            </div>
-            <div class="menu-card-body">
-              <div class="menu-card-name">Flakes &amp; Flames</div>
-              <div class="menu-card-desc">
-                Pasta in tomato sauce with melted cheese, olive oil &amp; olives
-              </div>
-              <div class="menu-card-footer">
-                <div class="menu-card-kcal">620/780 kcal</div>
-              </div>
-              <div class="arabic">رقائق ونيران نباتي/غير نباتي</div>
-            </div>
-          </div>
-          <div class="menu-card">
-            <div class="menu-card-img-wrap">
-              <img
-                src="food-photos/PASTAS/penne%20ducale/penne%20ducale.png"
-                alt="Penne Ducale"
-                class="menu-card-img"
-              />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >28/30
-              </div>
-            </div>
-            <div class="menu-card-body">
-              <div class="menu-card-name">Penne Ducale</div>
-              <div class="menu-card-desc">
-                Creamy white sauce pasta with cream cheese
-              </div>
-              <div class="menu-card-footer">
-                <div class="menu-card-kcal">580/730 kcal</div>
-              </div>
-              <div class="arabic">بيني دوكالي نباتي/غير نباتي</div>
-            </div>
-          </div>
-          <div class="menu-card">
-            <div class="menu-card-img-wrap">
-              <img
-                src="food-photos/SALADS/grilled%20chicken%20salad/grilled%20chicken%20salad.png"
-                alt="Grilled Chicken Salad"
-                class="menu-card-img"
-              />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >19
-              </div>
-            </div>
-            <div class="menu-card-body">
-              <div class="menu-card-name">Grilled Chicken Salad</div>
-              <div class="menu-card-desc">
-                Served with mashed potato &amp; honey sauce
-              </div>
-              <div class="arabic">سلطة الدجاج المشوي</div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="two-col-grid"
-          style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px"
-        >
+        <div class="two-col-grid">
           <div>
-            <h3 class="sub-heading"><em>Pastas</em></h3>
-            <div class="menu-list-grid" style="grid-template-columns: 1fr">
+            <h3 class="sub-heading">Pas<em>ta</em></h3>
+            <div class="menu-grid" style="margin-bottom: 0">
+              <div class="menu-card">
+                <div class="menu-card-img-wrap">
+                  <img
+                    src="food-photos/PASTAS/flakes%20and%20flames%20pasta/flakes%20and%20flames%20pasta.png"
+                    alt="Flakes and Flames Pasta"
+                    class="menu-card-img"
+                  />
+                  <div class="menu-card-img-overlay"></div>
+                  <div class="menu-card-badge">
+                    <span class="sar">SAR</span>32/35
+                  </div>
+                </div>
+                <div class="menu-card-body">
+                  <div class="menu-card-name">Flakes &amp; Flames</div>
+                  <div class="menu-card-desc">
+                    Pasta in tomato sauce with melted cheese, olive oil &amp;
+                    olives
+                  </div>
+                  <div class="menu-card-footer">
+                    <div class="menu-card-kcal">620/780 kcal</div>
+                  </div>
+                  <div class="arabic">رقائق ونيران نباتي/غير نباتي</div>
+                </div>
+              </div>
+              <div class="menu-card">
+                <div class="menu-card-img-wrap">
+                  <img
+                    src="food-photos/PASTAS/penne%20ducale/penne%20ducale.png"
+                    alt="Penne Ducale"
+                    class="menu-card-img"
+                  />
+                  <div class="menu-card-img-overlay"></div>
+                  <div class="menu-card-badge">
+                    <span class="sar">SAR</span>28/30
+                  </div>
+                </div>
+                <div class="menu-card-body">
+                  <div class="menu-card-name">Penne Ducale</div>
+                  <div class="menu-card-desc">
+                    Creamy white sauce pasta with cream cheese
+                  </div>
+                  <div class="menu-card-footer">
+                    <div class="menu-card-kcal">580/730 kcal</div>
+                  </div>
+                  <div class="arabic">بيني دوكالي نباتي/غير نباتي</div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="menu-list-grid"
+              style="grid-template-columns: 1fr; margin-top: 16px"
+            >
               <div class="menu-list-item">
+                <div class="item-icon">🍝</div>
                 <div class="menu-list-content">
                   <div class="menu-list-name">Arrabiata</div>
                   <div class="menu-list-desc">
                     Fusili in tomato sauce, cream cheese &amp; chilli flakes
                   </div>
-                  <div class="arabic" style="font-size: 12px">
-                    أربياتا نباتي/غير نباتي
-                  </div>
+                  <div class="arabic">أربياتا نباتي/غير نباتي</div>
                 </div>
                 <div class="menu-list-right">
                   <div class="menu-list-price">
@@ -1791,307 +2805,90 @@
                 </div>
               </div>
             </div>
-            <p
-              style="
-                font-size: 11px;
-                letter-spacing: 2px;
-                color: var(--muted);
-                margin-top: 16px;
-                text-transform: uppercase;
-              "
-            >
-              Veg / Non-Veg options available
-            </p>
           </div>
           <div>
-            <h3 class="sub-heading"><em>Salads</em></h3>
-            <div class="menu-list-grid" style="grid-template-columns: 1fr">
+            <h3 class="sub-heading">Sal<em>ads</em></h3>
+            <div
+              class="menu-grid"
+              style="grid-template-columns: 1fr; margin-bottom: 16px"
+            >
+              <div class="menu-card">
+                <div class="menu-card-img-wrap">
+                  <img
+                    src="food-photos/SALADS/grilled%20chicken%20salad/grilled%20chicken%20salad.png"
+                    alt="Grilled Chicken Salad"
+                    class="menu-card-img"
+                    style="height: 160px"
+                  />
+                  <div class="menu-card-img-overlay"></div>
+                  <div class="menu-card-badge">
+                    <span class="sar">SAR</span>19
+                  </div>
+                </div>
+                <div class="menu-card-body">
+                  <div class="menu-card-name">Grilled Chicken Salad</div>
+                  <div class="menu-card-desc">
+                    Served with mashed potato &amp; honey sauce
+                  </div>
+                  <div class="menu-card-footer">
+                    <div class="menu-card-kcal">320 kcal</div>
+                  </div>
+                  <div class="arabic">سلطة الدجاج المشوي</div>
+                </div>
+              </div>
+            </div>
+            <div class="menu-list-grid" style="grid-template-columns: 1fr; margin-top: 16px">
               <div class="menu-list-item">
-                <div
-                  class="menu-list-dot"
-                  style="background: var(--warm)"
-                ></div>
+                <div class="item-icon">🥗</div>
                 <div class="menu-list-content">
                   <div class="menu-list-name">Fattoush</div>
                   <div class="menu-list-desc">
-                    Iceberg lettuce, cucumber, capsicum &amp; fresh lemon
-                    dressing
+                    Iceberg lettuce, cucumber, capsicum &amp; fresh lemon dressing
                   </div>
-                  <div class="arabic" style="font-size: 12px">فتوش</div>
+                  <div class="arabic">فتوش</div>
                 </div>
                 <div class="menu-list-right">
-                  <div class="menu-list-price">
-                    <span class="sar">SAR</span>14
-                  </div>
+                  <div class="menu-list-price"><span class="sar">SAR</span>14</div>
                   <div class="menu-list-kcal">260 kcal</div>
                 </div>
               </div>
               <div class="menu-list-item">
-                <div
-                  class="menu-list-dot"
-                  style="background: var(--warm)"
-                ></div>
+                <div class="item-icon">🥗</div>
                 <div class="menu-list-content">
                   <div class="menu-list-name">Caesar Salad</div>
                   <div class="menu-list-desc">
                     Grilled chicken, croutons &amp; creamy Caesar dressing
                   </div>
-                  <div class="arabic" style="font-size: 12px">سلطة سيزر</div>
+                  <div class="arabic">سلطة سيزر</div>
                 </div>
                 <div class="menu-list-right">
-                  <div class="menu-list-price">
-                    <span class="sar">SAR</span>18
-                  </div>
+                  <div class="menu-list-price"><span class="sar">SAR</span>18</div>
                   <div class="menu-list-kcal">350 kcal</div>
                 </div>
               </div>
+            </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ══════════════════════════════ DRINKS ═════════════════════════════ -->
+    <!-- ══════════════════════════════ DRINKS ══════════════════════════════ -->
     <section class="section" id="drinks">
       <div class="container">
         <div class="section-header">
-          <div class="section-number">09</div>
+          <div class="section-num">09</div>
           <div class="section-title-block">
-            <p class="section-label">Refreshing Sips</p>
-            <h2 class="section-title">Mojitos &amp; <em>Juices</em></h2>
+            <p class="section-label">Refresh &amp; Revive</p>
+            <h2 class="section-title">Spe<em>cial Drinks</em></h2>
           </div>
-          <div class="section-divider"></div>
+          <div class="section-line"></div>
         </div>
 
-        <!-- Our Signature Blend -->
-        <h3 class="sub-heading" style="margin-bottom: 24px">
-          Our Signature <em>Blend</em>
-        </h3>
-        <div class="menu-grid" style="margin-bottom: 2px">
-          <div class="menu-card">
-            <div class="menu-card-img-wrap">
-              <img
-                src="food-photos/OUR%20SIGNATURE%20BLEND/mt%20special/mt%20special%20juice/mt%20special2.png"
-                alt="Midtown Special"
-                class="menu-card-img"
-              />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >20
-              </div>
-            </div>
-            <div class="menu-card-body">
-              <div class="menu-card-name">
-                Midtown Special
-                <span
-                  style="
-                    font-size: 10px;
-                    letter-spacing: 2px;
-                    color: var(--muted);
-                    text-transform: uppercase;
-                  "
-                  >M/S</span
-                >
-              </div>
-              <div class="menu-card-desc">
-                A refreshing signature drink blended with strawberry and mango
-              </div>
-              <div class="menu-card-footer">
-                <div class="menu-card-kcal">620 kcal</div>
-              </div>
-              <div class="arabic">ميدتاون الخاص</div>
-            </div>
-          </div>
-          <div class="menu-card">
-            <div class="menu-card-img-wrap">
-              <img
-                src="food-photos/OUR%20SIGNATURE%20BLEND/dry%20fruite%20shake/dry%20fruite%20shake%20.png"
-                alt="Dry Fruit Shake"
-                class="menu-card-img"
-              />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >20
-              </div>
-            </div>
-            <div class="menu-card-body">
-              <div class="menu-card-name">
-                Dry Fruit Shake
-                <span
-                  style="
-                    font-size: 10px;
-                    letter-spacing: 2px;
-                    color: var(--muted);
-                    text-transform: uppercase;
-                  "
-                  >M/S</span
-                >
-              </div>
-              <div class="menu-card-desc">
-                Nutrient-rich, nutty energy boost
-              </div>
-              <div class="menu-card-footer">
-                <div class="menu-card-kcal">450 kcal</div>
-              </div>
-              <div class="arabic">عصير فواكه مجففة</div>
-            </div>
-          </div>
-          <div class="menu-card">
-            <div class="menu-card-img-wrap">
-              <img
-                src="food-photos/OUR%20SIGNATURE%20BLEND/olaya%20fresh%20juice/olaya%20fresh%20juice%20.png"
-                alt="Olaya Fresh Fruit"
-                class="menu-card-img"
-              />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >12
-              </div>
-            </div>
-            <div class="menu-card-body">
-              <div class="menu-card-name">
-                Olaya Fresh Fruit
-                <span
-                  style="
-                    font-size: 10px;
-                    letter-spacing: 2px;
-                    color: var(--muted);
-                    text-transform: uppercase;
-                  "
-                  >M/S</span
-                >
-              </div>
-              <div class="menu-card-desc">
-                Nutrient-rich, nutty energy boost
-              </div>
-              <div class="menu-card-footer">
-                <div class="menu-card-kcal">450 kcal</div>
-              </div>
-              <div class="arabic">عصير فواكه طازجة العلاية</div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="menu-list-grid"
-          style="margin-bottom: 40px; margin-top: 10px"
-        >
-          <div class="menu-list-item">
-            <div class="menu-list-content">
-              <div class="menu-list-name">
-                Abood
-                <span
-                  style="
-                    font-size: 10px;
-                    letter-spacing: 2px;
-                    color: var(--muted);
-                    text-transform: uppercase;
-                  "
-                  >M/S</span
-                >
-              </div>
-              <div class="menu-list-desc">
-                A brilliant combination of honey dew melon and mango
-              </div>
-              <div class="arabic">عبود</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>16</div>
-              <div class="menu-list-kcal">560 kcal</div>
-            </div>
-          </div>
-          <div class="menu-list-item">
-            <div class="menu-list-content">
-              <div class="menu-list-name">Cold Milo</div>
-              <div class="menu-list-desc">Chilled, malty chocolate comfort</div>
-              <div class="arabic">ميلو بارد</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>16</div>
-              <div class="menu-list-kcal">630 kcal</div>
-            </div>
-          </div>
-          <div class="menu-list-item">
-            <div class="menu-list-content">
-              <div class="menu-list-name">
-                Queen of Heart
-                <span
-                  style="
-                    font-size: 10px;
-                    letter-spacing: 2px;
-                    color: var(--muted);
-                    text-transform: uppercase;
-                  "
-                  >M/S</span
-                >
-              </div>
-              <div class="menu-list-desc">Smooth, easy-going refreshment</div>
-              <div class="arabic">مافي مشكل</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>20</div>
-              <div class="menu-list-kcal">450 kcal</div>
-            </div>
-          </div>
-          <div class="menu-list-item">
-            <div class="menu-list-content">
-              <div class="menu-list-name">
-                Awar Qalb
-                <span
-                  style="
-                    font-size: 10px;
-                    letter-spacing: 2px;
-                    color: var(--muted);
-                    text-transform: uppercase;
-                  "
-                  >M/S</span
-                >
-              </div>
-              <div class="menu-list-desc">Romantic, sweet berry fusion</div>
-              <div class="arabic">أور قلبي</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>12</div>
-              <div class="menu-list-kcal">450 kcal</div>
-            </div>
-          </div>
-          <div class="menu-list-item">
-            <div class="menu-list-content">
-              <div class="menu-list-name">
-                Creamy Berries
-                <span
-                  style="
-                    font-size: 10px;
-                    letter-spacing: 2px;
-                    color: var(--muted);
-                    text-transform: uppercase;
-                  "
-                  >M/S</span
-                >
-              </div>
-              <div class="menu-list-desc">Rich, velvety forest fruits</div>
-              <div class="arabic">توت كريمي</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>12</div>
-              <div class="menu-list-kcal">220 kcal</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Fresh Juices -->
-        <h3 class="sub-heading" style="margin-bottom: 24px; margin-top: 60px">
+        <h3 class="sub-heading" style="margin-top: 48px; margin-bottom: 24px">
           Fresh <em>Juices</em>
         </h3>
-        <div class="menu-grid" style="margin-bottom: 2px">
+        <div class="menu-grid" style="margin-bottom: 16px">
           <div class="menu-card">
             <div class="menu-card-img-wrap">
               <img
@@ -2099,19 +2896,12 @@
                 alt="Watermelon"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >12
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>12</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">Watermelon</div>
-              <div class="menu-card-desc">
-                Light, hydrating summer refresher
-              </div>
+              <div class="menu-card-desc">Light, hydrating summer refresher</div>
               <div class="menu-card-footer">
                 <div class="menu-card-kcal">190 kcal</div>
               </div>
@@ -2119,11 +2909,9 @@
             </div>
           </div>
         </div>
-        <div
-          class="menu-list-grid"
-          style="margin-bottom: 40px; margin-top: 10px"
-        >
+        <div class="menu-list-grid" style="margin-bottom: 40px">
           <div class="menu-list-item">
+            <div class="item-icon">🍊</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Orange</div>
               <div class="menu-list-desc">Freshly squeezed, zesty citrus</div>
@@ -2135,11 +2923,10 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🥭</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Mango</div>
-              <div class="menu-list-desc">
-                Thick, velvety tropical sweetness
-              </div>
+              <div class="menu-list-desc">Thick, velvety tropical sweetness</div>
               <div class="arabic">مانجو</div>
             </div>
             <div class="menu-list-right">
@@ -2148,6 +2935,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🥕</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Carrot</div>
               <div class="menu-list-desc">Earthy, sweet root vitality</div>
@@ -2159,6 +2947,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🌿</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Mint Lime</div>
               <div class="menu-list-desc">Sharp, zesty herbal zing</div>
@@ -2171,11 +2960,10 @@
           </div>
         </div>
 
-        <!-- Fresh Fruit Blend -->
-        <h3 class="sub-heading" style="margin-bottom: 24px; margin-top: 60px">
+        <h3 class="sub-heading" style="margin-top: 48px; margin-bottom: 24px">
           Fresh Fruit <em>Blend</em>
         </h3>
-        <div class="menu-grid" style="margin-bottom: 2px">
+        <div class="menu-grid" style="margin-bottom: 24px">
           <div class="menu-card">
             <div class="menu-card-img-wrap">
               <img
@@ -2183,13 +2971,8 @@
                 alt="Berry Treat"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >14
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>14</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">Berry Treat</div>
@@ -2209,13 +2992,8 @@
                 alt="Mint Fusion"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >14
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>14</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">Mint Fusion</div>
@@ -2233,13 +3011,8 @@
                 alt="Passion Mango"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >16
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>16</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">Passion Mango</div>
@@ -2259,13 +3032,8 @@
                 alt="Orange Mango"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >14
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>14</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">Orange Mango</div>
@@ -2277,11 +3045,9 @@
             </div>
           </div>
         </div>
-        <div
-          class="menu-list-grid"
-          style="margin-bottom: 40px; margin-top: 10px"
-        >
+        <div class="menu-list-grid" style="margin-bottom: 24px">
           <div class="menu-list-item">
+            <div class="item-icon">🍹</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Cocktail</div>
               <div class="menu-list-desc">Vibrant, refreshing tropical mix</div>
@@ -2294,11 +3060,10 @@
           </div>
         </div>
 
-        <!-- Mojitos -->
-        <h3 class="sub-heading" style="margin-bottom: 24px; margin-top: 60px">
+        <h3 class="sub-heading" style="margin-top: 48px; margin-bottom: 24px">
           <em>Mojitos</em>
         </h3>
-        <div class="menu-grid" style="margin-bottom: 2px">
+        <div class="menu-grid" style="margin-bottom: 16px">
           <div class="menu-card">
             <div class="menu-card-img-wrap">
               <img
@@ -2306,13 +3071,8 @@
                 alt="Citrus"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >14
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>14</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">Citrus</div>
@@ -2324,11 +3084,9 @@
             </div>
           </div>
         </div>
-        <div
-          class="menu-list-grid"
-          style="margin-bottom: 40px; margin-top: 10px"
-        >
+        <div class="menu-list-grid" style="margin-bottom: 40px">
           <div class="menu-list-item">
+            <div class="item-icon">🌿</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Classic</div>
               <div class="menu-list-desc">Refreshing minty lime</div>
@@ -2340,6 +3098,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🌶️</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Passion Fruit</div>
               <div class="menu-list-desc">Zesty, tropical exotic tang</div>
@@ -2351,6 +3110,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍉</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Watermelon</div>
               <div class="menu-list-desc">Sweet, hydrating summer chill</div>
@@ -2362,6 +3122,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍓</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Strawberry</div>
               <div class="menu-list-desc">Sweet, luscious berry twist</div>
@@ -2374,12 +3135,12 @@
           </div>
         </div>
 
-        <!-- Bottle Juices -->
-        <h3 class="sub-heading" style="margin-bottom: 24px; margin-top: 60px">
+        <h3 class="sub-heading" style="margin-top: 48px; margin-bottom: 24px">
           Bottle <em>Juices</em>
         </h3>
         <div class="menu-list-grid" style="margin-bottom: 40px">
           <div class="menu-list-item">
+            <div class="item-icon">🍹</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Special</div>
               <div class="menu-list-desc">Vibrant, refreshing tropical mix</div>
@@ -2391,6 +3152,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍊</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Orange Mango</div>
               <div class="menu-list-desc">Zesty, sun-ripened citrus fusion</div>
@@ -2403,30 +3165,31 @@
           </div>
         </div>
 
-        <!-- Killer Shake -->
-        <h3 class="sub-heading" style="margin-bottom: 24px; margin-top: 60px">
+        <h3 class="sub-heading" style="margin-top: 48px; margin-bottom: 24px">
           Killer <em>Shake</em>
         </h3>
         <div class="menu-list-grid" style="margin-bottom: 40px">
           <div class="menu-list-item">
+            <div class="item-icon">🍫</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Nutella</div>
-              <div class="menu-list-desc">
-                Creamy, hazelnut cocoa indulgence
-              </div>
+              <div class="menu-list-desc">Creamy, hazelnut cocoa indulgence</div>
               <div class="arabic">نوتيلا</div>
             </div>
             <div class="menu-list-right">
+              <div class="menu-list-price"><span class="sar">SAR</span>30</div>
               <div class="menu-list-kcal">650 kcal</div>
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍫</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Swiss Chocolate</div>
               <div class="menu-list-desc">Rich, velvety alpine cocoa</div>
               <div class="arabic">شوكولاتة سويسرية</div>
             </div>
             <div class="menu-list-right">
+              <div class="menu-list-price"><span class="sar">SAR</span>35</div>
               <div class="menu-list-kcal">320 kcal</div>
             </div>
           </div>
@@ -2434,20 +3197,43 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════ SHAKES ═════════════════════════════ -->
+    <!-- ══════════════════════════════ SHAKES ══════════════════════════════ -->
     <section class="section section-alt" id="shakes">
       <div class="container">
         <div class="section-header">
-          <div class="section-number">10</div>
+          <div class="section-num">10</div>
           <div class="section-title-block">
             <p class="section-label">Thick &amp; Indulgent</p>
             <h2 class="section-title">Shakes &amp; <em>Falooda</em></h2>
           </div>
-          <div class="section-divider"></div>
+          <div class="section-line"></div>
         </div>
 
-        <!-- Photo items: Dry Fruit Shake, MT Special Falooda, Olaya Beast -->
-        <div class="menu-grid" style="margin-bottom: 40px">
+        <h3 class="sub-heading" style="margin-top: 48px; margin-bottom: 24px">
+          Our Signature <em>Blend</em>
+        </h3>
+        <div class="menu-grid" style="margin-bottom: 24px">
+          <div class="menu-card">
+            <div class="menu-card-img-wrap">
+              <img
+                src="food-photos/OUR%20SIGNATURE%20BLEND/mt%20special/mt%20special%20juice/mt%20special2.png"
+                alt="Midtown Special"
+                class="menu-card-img"
+              />
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>20</div>
+            </div>
+            <div class="menu-card-body">
+              <div class="menu-card-name">Midtown Special <span class="tag">M/S</span></div>
+              <div class="menu-card-desc">
+                A refreshing signature drink blended with strawberry and mango
+              </div>
+              <div class="menu-card-footer">
+                <div class="menu-card-kcal">620 kcal</div>
+              </div>
+              <div class="arabic">ميدتاون الخاص</div>
+            </div>
+          </div>
           <div class="menu-card">
             <div class="menu-card-img-wrap">
               <img
@@ -2455,25 +3241,107 @@
                 alt="Dry Fruit Shake"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >20
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>20</div>
             </div>
             <div class="menu-card-body">
-              <div class="menu-card-name">Dry Fruit Shake</div>
+              <div class="menu-card-name">Dry Fruit Shake <span class="tag">M/S</span></div>
               <div class="menu-card-desc">
-                Rich, indulgent blend of premium dried fruits
+                Nutrient-rich, nutty energy boost
               </div>
               <div class="menu-card-footer">
-                <div class="menu-card-kcal">520 kcal</div>
+                <div class="menu-card-kcal">450 kcal</div>
               </div>
-              <div class="arabic">شيك فواكه جافة</div>
+              <div class="arabic">عصير فواكه مجففة</div>
             </div>
           </div>
+          <div class="menu-card">
+            <div class="menu-card-img-wrap">
+              <img
+                src="food-photos/OUR%20SIGNATURE%20BLEND/olaya%20fresh%20juice/olaya%20fresh%20juice%20.png"
+                alt="Olaya Fresh Fruit"
+                class="menu-card-img"
+              />
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>12</div>
+            </div>
+            <div class="menu-card-body">
+              <div class="menu-card-name">Olaya Fresh Fruit <span class="tag">M/S</span></div>
+              <div class="menu-card-desc">Nutrient-rich, nutty energy boost</div>
+              <div class="menu-card-footer">
+                <div class="menu-card-kcal">450 kcal</div>
+              </div>
+              <div class="arabic">عصير فواكه طازجة العلاية</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-list-grid" style="margin-bottom: 40px">
+          <div class="menu-list-item">
+            <div class="item-icon">🥭</div>
+            <div class="menu-list-content">
+              <div class="menu-list-name">Abood <span class="tag">M/S</span></div>
+              <div class="menu-list-desc">A brilliant combination of honey dew melon and mango</div>
+              <div class="arabic">عبود</div>
+            </div>
+            <div class="menu-list-right">
+              <div class="menu-list-price"><span class="sar">SAR</span>16</div>
+              <div class="menu-list-kcal">560 kcal</div>
+            </div>
+          </div>
+          <div class="menu-list-item">
+            <div class="item-icon">🍫</div>
+            <div class="menu-list-content">
+              <div class="menu-list-name">Cold Milo</div>
+              <div class="menu-list-desc">Chilled, malty chocolate comfort</div>
+              <div class="arabic">ميلو بارد</div>
+            </div>
+            <div class="menu-list-right">
+              <div class="menu-list-price"><span class="sar">SAR</span>16</div>
+              <div class="menu-list-kcal">630 kcal</div>
+            </div>
+          </div>
+          <div class="menu-list-item">
+            <div class="item-icon">🌹</div>
+            <div class="menu-list-content">
+              <div class="menu-list-name">Queen of Heart <span class="tag">M/S</span></div>
+              <div class="menu-list-desc">Smooth, easy-going refreshment</div>
+              <div class="arabic">مافي مشكل</div>
+            </div>
+            <div class="menu-list-right">
+              <div class="menu-list-price"><span class="sar">SAR</span>20</div>
+              <div class="menu-list-kcal">450 kcal</div>
+            </div>
+          </div>
+          <div class="menu-list-item">
+            <div class="item-icon">🍓</div>
+            <div class="menu-list-content">
+              <div class="menu-list-name">Awar Qalb <span class="tag">M/S</span></div>
+              <div class="menu-list-desc">Romantic, sweet berry fusion</div>
+              <div class="arabic">أور قلبي</div>
+            </div>
+            <div class="menu-list-right">
+              <div class="menu-list-price"><span class="sar">SAR</span>12</div>
+              <div class="menu-list-kcal">450 kcal</div>
+            </div>
+          </div>
+          <div class="menu-list-item">
+            <div class="item-icon">🫐</div>
+            <div class="menu-list-content">
+              <div class="menu-list-name">Creamy Berries <span class="tag">M/S</span></div>
+              <div class="menu-list-desc">Rich, velvety forest fruits</div>
+              <div class="arabic">توت كريمي</div>
+            </div>
+            <div class="menu-list-right">
+              <div class="menu-list-price"><span class="sar">SAR</span>12</div>
+              <div class="menu-list-kcal">220 kcal</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="sub-heading" style="margin-bottom: 24px; margin-top: 60px">
+          Fa<em>looda</em>
+        </h3>
+        <div class="menu-grid" style="margin-bottom: 24px">
           <div class="menu-card">
             <div class="menu-card-img-wrap">
               <img
@@ -2481,13 +3349,8 @@
                 alt="MT Special Falooda"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >22
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>22</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">MT Special Falooda</div>
@@ -2505,13 +3368,8 @@
                 alt="Olaya Beast"
                 class="menu-card-img"
               />
-              <div class="menu-card-badge">
-                <span
-                  class="sar"
-                  style="font-size: 11px; color: var(--gold-light)"
-                  >SAR</span
-                >20
-              </div>
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>20</div>
             </div>
             <div class="menu-card-body">
               <div class="menu-card-name">Olaya Beast</div>
@@ -2522,54 +3380,31 @@
               <div class="arabic">الوحش العلاية</div>
             </div>
           </div>
-        </div>
-
-        <!-- Remaining shakes as list -->
-        <h3 class="sub-heading" style="margin-bottom: 24px; margin-top: 60px">
-          More <em>Shakes</em>
-        </h3>
-        <div class="menu-list-grid">
-          <div class="menu-list-item">
-            <div class="menu-list-content">
-              <div class="menu-list-name">Vanilla Shake</div>
-              <div class="menu-list-desc">Classic, creamy vanilla dream</div>
-              <div class="arabic">شيك فانيلا</div>
+          <div class="menu-card">
+            <div class="menu-card-img-wrap">
+              <img
+                src="food-photos/mango%20mastani/mango%20mastani.jpeg"
+                alt="Mango Mastani"
+                class="menu-card-img"
+              />
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>18</div>
             </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>16</div>
-              <div class="menu-list-kcal">480 kcal</div>
-            </div>
-          </div>
-          <div class="menu-list-item">
-            <div class="menu-list-content">
-              <div class="menu-list-name">Chocolate Shake</div>
-              <div class="menu-list-desc">Rich, velvety cocoa indulgence</div>
-              <div class="arabic">شيك شوكولاتة</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>16</div>
-              <div class="menu-list-kcal">500 kcal</div>
-            </div>
-          </div>
-          <div class="menu-list-item">
-            <div class="menu-list-content">
-              <div class="menu-list-name">Strawberry Shake</div>
-              <div class="menu-list-desc">Bright, fresh berry sweetness</div>
-              <div class="arabic">شيك فراولة</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>16</div>
-              <div class="menu-list-kcal">460 kcal</div>
+            <div class="menu-card-body">
+              <div class="menu-card-name">Mango Mastani</div>
+              <div class="menu-card-desc">
+                Rich mango blend with creamy toppings
+              </div>
+              <div class="menu-card-footer">
+                <div class="menu-card-kcal">420 kcal</div>
+              </div>
+              <div class="arabic">مانجو مستاني</div>
             </div>
           </div>
         </div>
-
-        <!-- Falooda list items -->
-        <h3 class="sub-heading" style="margin-bottom: 24px; margin-top: 60px">
-          Fa<em>looda</em>
-        </h3>
         <div class="menu-list-grid">
           <div class="menu-list-item">
+            <div class="item-icon">🌟</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Midtown Special</div>
               <div class="menu-list-desc">Signature blend, bold flavors</div>
@@ -2581,6 +3416,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">💪</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Olaya Beast</div>
               <div class="menu-list-desc">Powerful, intense protein kick</div>
@@ -2592,6 +3428,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍫</div>
             <div class="menu-list-content">
               <div class="menu-list-name">The Belgian</div>
               <div class="menu-list-desc">
@@ -2605,6 +3442,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">💥</div>
             <div class="menu-list-content">
               <div class="menu-list-name">The Blasted Boom</div>
               <div class="menu-list-desc">Explosive, sweet flavor burst</div>
@@ -2616,6 +3454,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍎</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Fruit Salad</div>
               <div class="menu-list-desc">Fresh, vibrant garden medley</div>
@@ -2630,33 +3469,50 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════ FRUIT PUNCH ════════════════════════ -->
+    <!-- ══════════════════════════════ FRUIT PUNCH ═════════════════════════ -->
     <section class="section" id="fruitpunch">
       <div class="container">
         <div class="section-header">
-          <div class="section-number">11</div>
+          <div class="section-num">11</div>
           <div class="section-title-block">
             <p class="section-label">In a Jar</p>
             <h2 class="section-title">Fruit <em>Punch</em></h2>
           </div>
-          <div class="section-divider"></div>
+          <div class="section-line"></div>
+        </div>
+
+        <!-- Feature Banner -->
+        <div class="feature-banner">
+          <div>
+            <div class="feature-banner-label">🍯 Layered in a Jar</div>
+            <div class="feature-banner-title">Mango Fruit Punch</div>
+            <div class="feature-banner-sub">
+              Layers of soft cake and creamy mango blend — our most loved jar
+              dessert
+            </div>
+            <div
+              class="arabic"
+              style="
+                margin-top: 12px;
+                font-size: 14px;
+                color: rgba(255, 255, 255, 0.5);
+              "
+            >
+              مانجو فروت بانش
+            </div>
+          </div>
+          <div class="feature-price-block">
+            <div class="feature-price">
+              <span style="font-size: 20px; color: var(--brown-light)">SAR</span
+              >15
+            </div>
+            <div class="feature-price-label">400 kcal</div>
+          </div>
         </div>
 
         <div class="menu-list-grid">
           <div class="menu-list-item">
-            <div class="menu-list-content">
-              <div class="menu-list-name">Mango Fruit Punch</div>
-              <div class="menu-list-desc">
-                Layers of soft cake and creamy mango blend in a jar
-              </div>
-              <div class="arabic">مانجو فروت بانش</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>15</div>
-              <div class="menu-list-kcal">400 kcal</div>
-            </div>
-          </div>
-          <div class="menu-list-item">
+            <div class="item-icon">🍓</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Strawberry Fruit Punch</div>
               <div class="menu-list-desc">
@@ -2670,6 +3526,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🫐</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Blueberry Fruit Punch</div>
               <div class="menu-list-desc">
@@ -2683,6 +3540,7 @@
             </div>
           </div>
           <div class="menu-list-item">
+            <div class="item-icon">🍪</div>
             <div class="menu-list-content">
               <div class="menu-list-name">Lotus Fruit Punch</div>
               <div class="menu-list-desc">
@@ -2701,43 +3559,64 @@
 
     <!-- ═══════════════════════════════ FOOTER ════════════════════════════ -->
     <footer class="footer">
-      <div class="footer-logo">Mid<span>town</span></div>
-      <p class="footer-text">Crafted with passion · Riyadh, Saudi Arabia</p>
-      <div
-        style="
-          margin-top: 24px;
-          display: flex;
-          justify-content: center;
-          gap: 40px;
-          align-items: center;
-        "
-      >
-        <div
-          style="
-            width: 40px;
-            height: 1px;
-            background: var(--gold);
-            opacity: 0.3;
-          "
-        ></div>
-        <p
-          style="
-            font-family: &quot;Cormorant Garamond&quot;, serif;
-            font-style: italic;
-            font-size: 14px;
-            color: rgba(245, 240, 232, 0.3);
-          "
-        >
-          All prices in Saudi Riyals · VAT included
-        </p>
-        <div
-          style="
-            width: 40px;
-            height: 1px;
-            background: var(--gold);
-            opacity: 0.3;
-          "
-        ></div>
+      <div class="footer-orb"></div>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo-text">Mid<span>town</span></div>
+          <div class="footer-logo-sub">Street Café · Riyadh</div>
+          <div class="footer-desc">
+           The taste you’ll remember.
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Menu</div>
+          <div class="footer-col-item" onclick="scrollToSection('coffees')">
+            Coffees
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('teas')">
+            Teas
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('starters')">
+            Appetisers
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('burgers')">
+            Burgers
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('sandwiches')">
+            Sandwiches
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('shawarma')">
+            Shawarma
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">More</div>
+          <div class="footer-col-item" onclick="scrollToSection('mains')">
+            Main Dishes
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('pasta')">
+            Pasta &amp; Salads
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('drinks')">
+            Special Drinks
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('shakes')">
+            Shakes &amp; Falooda
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('fruitpunch')">
+            Fruit Punch
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">
+  © <span id="year"></span> Midtown Street Café · Riyadh, Saudi Arabia
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+        <div class="footer-vat">All prices in SAR · VAT Included</div>
       </div>
     </footer>
 
@@ -2749,36 +3628,58 @@
         document
           .querySelectorAll(".nav-item")
           .forEach((n) => n.classList.remove("active"));
-        event.target.classList.add("active");
+        event?.target?.classList.add("active");
       }
+
+      // Intersection observer for active nav
       const sections = document.querySelectorAll("section[id]");
       const navItems = document.querySelectorAll(".nav-item");
+      const sectionMap = {
+        coffees: 0,
+        teas: 1,
+        starters: 2,
+        burgers: 3,
+        sandwiches: 4,
+        shawarma: 5,
+        mains: 6,
+        pasta: 7,
+        drinks: 8,
+        shakes: 9,
+        fruitpunch: 10,
+      };
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
             if (e.isIntersecting) {
-              const map = {
-                coffees: 0,
-                teas: 1,
-                starters: 2,
-                burgers: 3,
-                sandwiches: 4,
-                shawarma: 5,
-                mains: 6,
-                pasta: 7,
-                drinks: 8,
-                shakes: 9,
-                fruitpunch: 10,
-              };
               navItems.forEach((n) => n.classList.remove("active"));
-              if (map[e.target.id] !== undefined)
-                navItems[map[e.target.id]]?.classList.add("active");
+              if (sectionMap[e.target.id] !== undefined)
+                navItems[sectionMap[e.target.id]]?.classList.add("active");
             }
           });
         },
-        { threshold: 0.2 },
+        { threshold: 0.25 },
       );
       sections.forEach((s) => observer.observe(s));
+
+      // Scroll reveal for list items
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e, i) => {
+            if (e.isIntersecting) {
+              e.target.style.animation = `fadeUp 0.5s ease ${i * 0.04}s both`;
+              e.target.style.opacity = "1";
+              revealObserver.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document
+        .querySelectorAll(".menu-list-item, .menu-card, .drink-card")
+        .forEach((el) => {
+          el.style.opacity = "0";
+          revealObserver.observe(el);
+        });
     </script>
   </body>
 </html>
