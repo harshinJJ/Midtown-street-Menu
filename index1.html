@@ -51,6 +51,7 @@
         font-family: "Space Grotesk", sans-serif;
         font-weight: 300;
         overflow-x: hidden;
+        max-width: 100%;
       }
 
       /* ─── NOISE OVERLAY ─── */
@@ -352,8 +353,10 @@
       .scroll-indicator {
         position: absolute;
         bottom: 40px;
-        
-        transform: translateX(-50%);
+        left: 0;
+        right: 0;
+        width: fit-content;
+        margin: 0 auto;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -600,6 +603,8 @@
         transition: all 0.3s;
         position: relative;
         cursor: default;
+        min-width: 0;
+        overflow: hidden;
       }
       .menu-list-item::before {
         content: "";
@@ -633,6 +638,8 @@
       }
       .menu-list-content {
         flex: 1;
+        min-width: 0;
+        overflow: hidden;
       }
       .menu-list-name {
         font-family: "Syne", sans-serif;
@@ -693,9 +700,12 @@
         border-radius: 16px;
         overflow: hidden;
         position: relative;
-        transition: all 0.4s;
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          border-color 0.3s ease,
+          box-shadow 0.3s ease;
         cursor: default;
         backdrop-filter: blur(10px);
+        will-change: transform;
       }
       .menu-card:hover {
         transform: translateY(-8px);
@@ -713,7 +723,7 @@
         height: 220px;
         object-fit: cover;
         display: block;
-        transition: transform 0.6s ease;
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         background: linear-gradient(135deg, #0e2347 0%, #1a3a6e 100%);
       }
       .menu-card:hover .menu-card-img {
@@ -1258,17 +1268,37 @@
     ═══════════════════════════════════════════════════ */
       @media (max-width: 768px) {
         /* Global */
+        body {
+          overflow-x: hidden;
+          width: 100%;
+        }
         .container {
           padding: 0 16px;
+          max-width: 100%;
         }
         .section {
           padding: 56px 0 36px;
+          max-width: 100%;
+          overflow-x: hidden;
         }
 
         /* Hero */
         .hero {
           min-height: 100svh;
           padding: 0 20px;
+          overflow-x: hidden;
+        }
+        .orb-1 {
+          width: 300px;
+          height: 300px;
+        }
+        .orb-2 {
+          width: 200px;
+          height: 200px;
+        }
+        .orb-3 {
+          width: 150px;
+          height: 150px;
         }
         .hero-title {
           letter-spacing: -1.5px;
@@ -1361,9 +1391,12 @@
         /* Menu list */
         .menu-list-grid {
           grid-template-columns: 1fr;
+          width: 100%;
         }
         .menu-list-item {
           padding: 18px 14px;
+          overflow: hidden;
+          min-width: 0;
         }
         .menu-list-name {
           font-size: 15px;
@@ -1636,6 +1669,8 @@
         .feature-banner {
           padding: 28px 20px;
           margin: 32px 0;
+          max-width: 100%;
+          overflow-x: hidden;
         }
         .feature-banner-title {
           font-size: 22px;
@@ -1698,12 +1733,24 @@
        TOUCH DEVICES — disable hover transforms for perf
     ═══════════════════════════════════════════════════ */
       @media (hover: none) {
+        .menu-card {
+          transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+        }
         .menu-card:hover,
         .drink-card:hover,
         .menu-hero-item:hover,
         .btn-primary:hover,
         .btn-secondary:hover {
           transform: none;
+          box-shadow: none;
+        }
+        .menu-card:active {
+          transform: scale(0.97);
+          border-color: rgba(37, 99, 235, 0.4);
         }
         .menu-card:hover .menu-card-img,
         .drink-card:hover .drink-card-img,
@@ -1712,6 +1759,12 @@
         }
         .menu-list-item::before {
           display: none;
+        }
+        .menu-list-item {
+          transition: background 0.15s ease;
+        }
+        .menu-list-item:active {
+          background: rgba(37, 99, 235, 0.06);
         }
       }
     </style>
@@ -1740,20 +1793,21 @@
         <div class="hero-divider"></div>
         <p class="hero-sub">The taste you’ll remember.</p>
         <div class="hero-cta-row">
-          <a
-            href="#coffees"
-            class="btn-primary"
-            onclick="smoothScroll('coffees')"
-          >
-            ☕ Explore Menu
-          </a>
-          <a
+                    <a
             href="#starters"
-            class="btn-secondary"
+            class="btn-primary"
             onclick="smoothScroll('starters')"
           >
             🍔 View Food
           </a>
+          <a
+            href="#drinks"
+            class="btn-secondary"
+            onclick="smoothScroll('drinks')"
+          >
+            ☕ View Drinks
+          </a>
+
         </div>
       </div>
 
@@ -1767,7 +1821,7 @@
     <div class="stats-bar">
       <div class="stats-inner">
         <div class="stat">
-          <div class="stat-num">13</div>
+          <div class="stat-num">11+</div>
           <div class="stat-label">Menu Categories</div>
         </div>
         <div class="stat">
@@ -1790,24 +1844,31 @@
     <nav class="nav-wrap">
       <div class="nav" id="mainNav">
         <div class="nav-logo">Mid<span>town</span></div>
-        <div class="nav-item active" onclick="scrollToSection('starters')">Appetisers</div>
+        <div class="nav-item active" onclick="scrollToSection('starters')">Starters</div>
         <div class="nav-item" onclick="scrollToSection('burgers')">Burgers</div>
-        <div class="nav-item" onclick="scrollToSection('mains')">Specialities</div>
-        <div class="nav-item" onclick="scrollToSection('pasta')">Pasta</div>
-        <div class="nav-item" onclick="scrollToSection('salads')">Salads</div>
-        <div class="nav-item" onclick="scrollToSection('sandwiches')">Sandwich</div>
-        <div class="nav-item" onclick="scrollToSection('shawarma')">Shawarma</div>
+        <div class="nav-item" onclick="scrollToSection('mains')">Our Specialities</div>
+        <div class="nav-item" onclick="scrollToSection('pasta')">
+          Pasta &amp; Salads
+        </div>
+        <div class="nav-item" onclick="scrollToSection('sandwiches')">
+          Sandwiches
+        </div>
+        <div class="nav-item" onclick="scrollToSection('shawarma')">
+          Shawarma
+        </div>
         <div class="nav-item" onclick="scrollToSection('drinks')">Drinks</div>
         <div class="nav-item" onclick="scrollToSection('shakes')">Shakes</div>
-        <div class="nav-item" onclick="scrollToSection('fruitpunch')">Fruit Punch</div>
-        <div class="nav-item" onclick="scrollToSection('coffees')">Coffee</div>
-        <div class="nav-item" onclick="scrollToSection('teas')">Tea</div>
+        <div class="nav-item" onclick="scrollToSection('fruitpunch')">
+          Fruit Punch
+        </div>
+        <div class="nav-item" onclick="scrollToSection('coffees')">Coffees</div>
+        <div class="nav-item" onclick="scrollToSection('teas')">Teas</div>
         <div class="nav-item" onclick="scrollToSection('addon')">Add On</div>
       </div>
     </nav>
 
     <!-- ══════════════════════════════ STARTERS ════════════════════════════ -->
-    <section class="section" style="background: linear-gradient(180deg, rgba(180, 83, 9, 0.18) 0%, rgba(10, 22, 40, 0.0) 100%);" id="starters">
+    <section class="section" id="starters">
       <div class="container">
         <div class="section-header">
           <div class="section-num">01</div>
@@ -1936,7 +1997,7 @@
     </section>
 
     <!-- ══════════════════════════════ BURGERS ═════════════════════════════ -->
-    <section class="section section-alt" style="background: linear-gradient(180deg, rgba(185, 28, 28, 0.18) 0%, rgba(10, 22, 40, 0.0) 100%);" id="burgers">
+    <section class="section section-alt" id="burgers">
       <div class="container">
         <div class="section-header">
           <div class="section-num">02</div>
@@ -2043,49 +2104,73 @@
           </div>
         </div>
 
-        <div class="menu-list-grid">
-          <div class="menu-list-item">
-            <div class="item-icon">🍔</div>
-            <div class="menu-list-content">
-              <div class="menu-list-name">Classic Chicken</div>
-              <div class="menu-list-desc">
+        <div class="menu-grid">
+          <div class="menu-card">
+            <div class="menu-card-img-wrap">
+              <img
+                src="food-photos/BURGERS/classic%20chicken%20burger/classic%20chicken%20burger.png"
+                alt="Classic Chicken"
+                class="menu-card-img"
+              />
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>12</div>
+            </div>
+            <div class="menu-card-body">
+              <div class="menu-card-name">Classic Chicken</div>
+              <div class="menu-card-desc">
                 Crispy patty layered with fresh lettuce, creamy mayo &amp; melted cheese
+              </div>
+              <div class="menu-card-footer">
+                <div class="menu-card-kcal">350 kcal</div>
               </div>
               <div class="arabic">كلاسيك تشيكن</div>
             </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>12</div>
-              <div class="menu-list-kcal">350 kcal</div>
-            </div>
           </div>
-          <div class="menu-list-item">
-            <div class="item-icon">🍔</div>
-            <div class="menu-list-content">
-              <div class="menu-list-name">Chicken Steak Burger</div>
-              <div class="menu-list-desc">
+          <div class="menu-card">
+            <div class="menu-card-img-wrap">
+              <img
+                src="food-photos/BURGERS/chicken%20steak%20burger/chicken%20steak%20burger.png"
+                alt="Chicken Steak Burger"
+                class="menu-card-img"
+              />
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>23</div>
+            </div>
+            <div class="menu-card-body">
+              <div class="menu-card-name">Chicken Steak Burger</div>
+              <div class="menu-card-desc">
                 Juicy steak chicken with lettuce &amp; mustard mayo
+              </div>
+              <div class="menu-card-footer">
+                <div class="menu-card-kcal">450 kcal</div>
               </div>
               <div class="arabic">تشيكن ستيك برجر</div>
             </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>23</div>
-              <div class="menu-list-kcal">450 kcal</div>
-            </div>
           </div>
-          <div class="menu-list-item">
-            <div class="item-icon">🍔</div>
-            <div class="menu-list-content">
-              <div class="menu-list-name">Gourmet Chicken</div>
-              <div class="menu-list-desc">
+          <div class="menu-card">
+            <div class="menu-card-img-wrap">
+              <img
+                src="food-photos/BURGERS/chicken%20gourmet%20burger/chicken%20gourmet%20burger.png"
+                alt="Gourmet Chicken"
+                class="menu-card-img"
+              />
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>23</div>
+            </div>
+            <div class="menu-card-body">
+              <div class="menu-card-name">Gourmet Chicken</div>
+              <div class="menu-card-desc">
                 Juicy chicken patty with melted cheese, fresh lettuce, tomato &amp; signature sauce
+              </div>
+              <div class="menu-card-footer">
+                <div class="menu-card-kcal">640 kcal</div>
               </div>
               <div class="arabic">جورمیه تشیکن</div>
             </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>23</div>
-              <div class="menu-list-kcal">640 kcal</div>
-            </div>
           </div>
+        </div>
+
+        <div class="menu-list-grid">
           <div class="menu-list-item">
             <div class="item-icon">🥩</div>
             <div class="menu-list-content">
@@ -2105,7 +2190,7 @@
     </section>
 
     <!-- ══════════════════════════════ MAINS ═══════════════════════════════ -->
-    <section class="section" style="background: linear-gradient(180deg, rgba(109, 40, 217, 0.18) 0%, rgba(10, 22, 40, 0.0) 100%);" id="mains">
+    <section class="section" id="mains">
       <div class="container">
         <div class="section-header">
           <div class="section-num">03</div>
@@ -2159,6 +2244,27 @@
               <div class="arabic">بيف ستيك باربكيو، بيبر / مشروم</div>
             </div>
           </div>
+          <div class="menu-card">
+            <div class="menu-card-img-wrap">
+              <img
+                src="food-photos/OUR%20SPECIALTIES/chicken%20steak%20BBQ/chicken%20steak.png"
+                alt="Chicken Steak"
+                class="menu-card-img"
+              />
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>40</div>
+            </div>
+            <div class="menu-card-body">
+              <div class="menu-card-name">Chicken Steak</div>
+              <div class="menu-card-desc">
+                BBQ, Pepper or Mushroom — steak served with veggies &amp; creamy mashed potato
+              </div>
+              <div class="menu-card-footer">
+                <div class="menu-card-kcal">280 kcal</div>
+              </div>
+              <div class="arabic">تشيكن ستيك باربكيو، بيبر / مشروم</div>
+            </div>
+          </div>
         </div>
 
         <div class="menu-list-grid">
@@ -2174,20 +2280,6 @@
             <div class="menu-list-right">
               <div class="menu-list-price"><span class="sar">SAR</span>30</div>
               <div class="menu-list-kcal">490 kcal</div>
-            </div>
-          </div>
-          <div class="menu-list-item">
-            <div class="item-icon">🥩</div>
-            <div class="menu-list-content">
-              <div class="menu-list-name">Chicken Steak</div>
-              <div class="menu-list-desc">
-                BBQ, Pepper or Mushroom — steak served with veggies &amp; creamy mashed potato
-              </div>
-              <div class="arabic">تشيكن ستيك باربكيو، بيبر / مشروم</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>40</div>
-              <div class="menu-list-kcal">280 kcal</div>
             </div>
           </div>
           <div class="menu-list-item">
@@ -2236,18 +2328,21 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════ PASTA ══════════════════════════════ -->
-    <section class="section" id="pasta" style="background: linear-gradient(180deg, rgba(194, 120, 46, 0.18) 0%, rgba(10, 22, 40, 0.0) 100%);">
+    <!-- ══════════════════════════════ PASTA & SALADS ══════════════════════ -->
+    <section class="section section-alt" id="pasta">
       <div class="container">
         <div class="section-header">
           <div class="section-num">04</div>
           <div class="section-title-block">
             <p class="section-label">Freshness on a Plate</p>
-            <h2 class="section-title">Pas<em>ta</em></h2>
+            <h2 class="section-title">Pasta &amp; <em>Salads</em></h2>
           </div>
           <div class="section-line"></div>
         </div>
-        <h3 class="sub-heading">Pas<em>ta</em></h3>
+
+        <div class="two-col-grid">
+          <div>
+            <h3 class="sub-heading">Pas<em>ta</em></h3>
             <div class="menu-grid" style="margin-bottom: 0">
               <div class="menu-card">
                 <div class="menu-card-img-wrap">
@@ -2262,7 +2357,7 @@
                   </div>
                 </div>
                 <div class="menu-card-body">
-                  <div class="menu-card-name">Flakes &amp; Flames Veg/</div>
+                  <div class="menu-card-name">Flakes &amp; Flames <span class="tag">Veg / NonVeg</span></div>
                   <div class="menu-card-desc">
                     Pasta in tomato sauce with melted cheese, olive oil &amp;
                     olives
@@ -2286,7 +2381,7 @@
                   </div>
                 </div>
                 <div class="menu-card-body">
-                  <div class="menu-card-name">Penne Ducale</div>
+                  <div class="menu-card-name">Penne Ducale <span class="tag">Veg / NonVeg</span></div>
                   <div class="menu-card-desc">
                     Creamy white sauce pasta with cream cheese
                   </div>
@@ -2296,43 +2391,33 @@
                   <div class="arabic">بيني دوكالي فيج / نون فيج</div>
                 </div>
               </div>
-            </div>
-            <div
-              class="menu-list-grid"
-              style="grid-template-columns: 1fr; margin-top: 16px"
-            >
-              <div class="menu-list-item">
-                <div class="item-icon">🍝</div>
-                <div class="menu-list-content">
-                  <div class="menu-list-name">Arrabiata</div>
-                  <div class="menu-list-desc">
+              <div class="menu-card">
+                <div class="menu-card-img-wrap">
+                  <img
+                    src="food-photos/Penne%20Arrabiata/Penne%20Arrabiata.png"
+                    alt="Arrabiata"
+                    class="menu-card-img"
+                  />
+                  <div class="menu-card-img-overlay"></div>
+                  <div class="menu-card-badge">
+                    <span class="sar">SAR</span>30/32
+                  </div>
+                </div>
+                <div class="menu-card-body">
+                  <div class="menu-card-name">Arrabiata <span class="tag">Veg / NonVeg</span></div>
+                  <div class="menu-card-desc">
                     Fusili pasta tossed in tomato sauce, cream cheese &amp; chilli flakes
+                  </div>
+                  <div class="menu-card-footer">
+                    <div class="menu-card-kcal">480/600 kcal</div>
                   </div>
                   <div class="arabic">أرابياتا فيج / نون فيج</div>
                 </div>
-                <div class="menu-list-right">
-                  <div class="menu-list-price">
-                    <span class="sar">SAR</span>30/32
-                  </div>
-                  <div class="menu-list-kcal">480/600 kcal</div>
-                </div>
               </div>
             </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════ SALADS ══════════════════════════════ -->
-    <section class="section" id="salads" style="background: linear-gradient(180deg, rgba(22, 101, 52, 0.22) 0%, rgba(10, 22, 40, 0.0) 100%);">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-num">05</div>
-          <div class="section-title-block">
-            <p class="section-label">Fresh &amp; Light</p>
-            <h2 class="section-title">Sal<em>ads</em></h2>
           </div>
-          <div class="section-line"></div>
-        </div>
-        <h3 class="sub-heading">Sal<em>ads</em></h3>
+          <div>
+            <h3 class="sub-heading">Sal<em>ads</em></h3>
             <div
               class="menu-grid"
               style="grid-template-columns: 1fr; margin-bottom: 16px"
@@ -2361,6 +2446,30 @@
                   <div class="arabic">جريل تشیکن سالاد</div>
                 </div>
               </div>
+              <div class="menu-card">
+                <div class="menu-card-img-wrap">
+                  <img
+                    src="food-photos/SALADS/cesar%20salad/cesar%20salad.png"
+                    alt="Caesar Salad"
+                    class="menu-card-img"
+                    style="height: 160px"
+                  />
+                  <div class="menu-card-img-overlay"></div>
+                  <div class="menu-card-badge">
+                    <span class="sar">SAR</span>18
+                  </div>
+                </div>
+                <div class="menu-card-body">
+                  <div class="menu-card-name">Caesar Salad</div>
+                  <div class="menu-card-desc">
+                    Grilled chicken, croutons &amp; creamy Caesar dressing
+                  </div>
+                  <div class="menu-card-footer">
+                    <div class="menu-card-kcal">350 kcal</div>
+                  </div>
+                  <div class="arabic">سیزر سالاد</div>
+                </div>
+              </div>
             </div>
             <div class="menu-list-grid" style="grid-template-columns: 1fr; margin-top: 16px">
               <div class="menu-list-item">
@@ -2377,29 +2486,18 @@
                   <div class="menu-list-kcal">260 kcal</div>
                 </div>
               </div>
-              <div class="menu-list-item">
-                <div class="item-icon">🥗</div>
-                <div class="menu-list-content">
-                  <div class="menu-list-name">Caesar Salad</div>
-                  <div class="menu-list-desc">
-                    Grilled chicken, croutons &amp; creamy Caesar dressing
-                  </div>
-                  <div class="arabic">سیزر سالاد</div>
-                </div>
-                <div class="menu-list-right">
-                  <div class="menu-list-price"><span class="sar">SAR</span>18</div>
-                  <div class="menu-list-kcal">350 kcal</div>
-                </div>
-              </div>
             </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ══════════════════════════════ SANDWICHES ══════════════════════════ -->
-    <section class="section" style="background: linear-gradient(180deg, rgba(14, 116, 144, 0.18) 0%, rgba(10, 22, 40, 0.0) 100%);" id="sandwiches">
+    <section class="section" id="sandwiches">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">06</div>
+          <div class="section-num">05</div>
           <div class="section-title-block">
             <p class="section-label">Club &amp; Long</p>
             <h2 class="section-title">Sand<em>wiches</em></h2>
@@ -2575,10 +2673,10 @@
     </section>
 
     <!-- ══════════════════════════════ SHAWARMA ════════════════════════════ -->
-    <section class="section section-alt" style="background: linear-gradient(180deg, rgba(161, 130, 0, 0.20) 0%, rgba(10, 22, 40, 0.0) 100%);" id="shawarma">
+    <section class="section section-alt" id="shawarma">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">07</div>
+          <div class="section-num">06</div>
           <div class="section-title-block">
             <p class="section-label">Rolled to Perfection</p>
             <h2 class="section-title">Sha<em>warma</em></h2>
@@ -2654,10 +2752,10 @@
     </section>
 
     <!-- ══════════════════════════════ DRINKS ══════════════════════════════ -->
-    <section class="section" style="background: linear-gradient(180deg, rgba(37, 99, 235, 0.20) 0%, rgba(10, 22, 40, 0.0) 100%);" id="drinks">
+    <section class="section" id="drinks">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">08</div>
+          <div class="section-num">07</div>
           <div class="section-title-block">
             <p class="section-label">Refresh &amp; Revive</p>
             <h2 class="section-title">Spe<em>cial Drinks</em></h2>
@@ -2686,6 +2784,25 @@
                 <div class="menu-card-kcal">190 kcal</div>
               </div>
               <div class="arabic">واتر ميلون</div>
+            </div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-img-wrap">
+              <img
+                src="food-photos/FRESH%20JUICES/mint%20lime/mint%20lime.png"
+                alt="Mint Lime"
+                class="menu-card-img"
+              />
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>12</div>
+            </div>
+            <div class="menu-card-body">
+              <div class="menu-card-name">Mint Lime</div>
+              <div class="menu-card-desc">Sharp, zesty herbal zing</div>
+              <div class="menu-card-footer">
+                <div class="menu-card-kcal">460 kcal</div>
+              </div>
+              <div class="arabic">مينت لايم</div>
             </div>
           </div>
         </div>
@@ -2724,18 +2841,6 @@
             <div class="menu-list-right">
               <div class="menu-list-price"><span class="sar">SAR</span>12</div>
               <div class="menu-list-kcal">320 kcal</div>
-            </div>
-          </div>
-          <div class="menu-list-item">
-            <div class="item-icon">🌿</div>
-            <div class="menu-list-content">
-              <div class="menu-list-name">Mint Lime</div>
-              <div class="menu-list-desc">Sharp, zesty herbal zing</div>
-              <div class="arabic">مينت لايم</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>12</div>
-              <div class="menu-list-kcal">460 kcal</div>
             </div>
           </div>
         </div>
@@ -2824,18 +2929,23 @@
               <div class="arabic">برتقال مانجو</div>
             </div>
           </div>
-        </div>
-        <div class="menu-list-grid" style="margin-bottom: 24px">
-          <div class="menu-list-item">
-            <div class="item-icon">🍹</div>
-            <div class="menu-list-content">
-              <div class="menu-list-name">Cocktail</div>
-              <div class="menu-list-desc">Vibrant, refreshing tropical mix</div>
-              <div class="arabic">كوكتيل</div>
+          <div class="menu-card">
+            <div class="menu-card-img-wrap">
+              <img
+                src="food-photos/FRESH%20FRUIT%20BLEND/cocktail/cocktail.png"
+                alt="Cocktail"
+                class="menu-card-img"
+              />
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>10</div>
             </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>10</div>
-              <div class="menu-list-kcal">220 kcal</div>
+            <div class="menu-card-body">
+              <div class="menu-card-name">Cocktail</div>
+              <div class="menu-card-desc">Vibrant, refreshing tropical mix</div>
+              <div class="menu-card-footer">
+                <div class="menu-card-kcal">220 kcal</div>
+              </div>
+              <div class="arabic">كوكتيل</div>
             </div>
           </div>
         </div>
@@ -2937,43 +3047,15 @@
           </div>
         </div>
 
-        <h3 class="sub-heading" style="margin-top: 48px; margin-bottom: 24px">
-          Killer <em>Shake</em>
-        </h3>
-        <div class="menu-list-grid" style="margin-bottom: 40px">
-          <div class="menu-list-item">
-            <div class="item-icon">🍫</div>
-            <div class="menu-list-content">
-              <div class="menu-list-name">Nutella</div>
-              <div class="menu-list-desc">Creamy, hazelnut cocoa indulgence</div>
-              <div class="arabic">نوتيلا</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>30</div>
-              <div class="menu-list-kcal">650 kcal</div>
-            </div>
-          </div>
-          <div class="menu-list-item">
-            <div class="item-icon">🍫</div>
-            <div class="menu-list-content">
-              <div class="menu-list-name">Swiss Chocolate</div>
-              <div class="menu-list-desc">Rich, velvety alpine cocoa</div>
-              <div class="arabic">شوكولاتة سويسرية</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>35</div>
-              <div class="menu-list-kcal">320 kcal</div>
-            </div>
-          </div>
-        </div>
+
       </div>
     </section>
 
     <!-- ══════════════════════════════ SHAKES ══════════════════════════════ -->
-    <section class="section section-alt" style="background: linear-gradient(180deg, rgba(91, 33, 182, 0.20) 0%, rgba(10, 22, 40, 0.0) 100%);" id="shakes">
+    <section class="section section-alt" id="shakes">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">09</div>
+          <div class="section-num">08</div>
           <div class="section-title-block">
             <p class="section-label">Thick &amp; Indulgent</p>
             <h2 class="section-title">Shakes &amp; <em>Falooda</em></h2>
@@ -2996,7 +3078,7 @@
               <div class="menu-card-badge"><span class="sar">SAR</span>20</div>
             </div>
             <div class="menu-card-body">
-              <div class="menu-card-name">Midtown Special <span class="tag">M/S</span></div>
+              <div class="menu-card-name">Midtown Special </div>
               <div class="menu-card-desc">
                 A refreshing signature drink blended with strawberry and mango
               </div>
@@ -3017,7 +3099,7 @@
               <div class="menu-card-badge"><span class="sar">SAR</span>20</div>
             </div>
             <div class="menu-card-body">
-              <div class="menu-card-name">Dry Fruit Shake <span class="tag">M/S</span></div>
+              <div class="menu-card-name">Dry Fruit Shake</div>
               <div class="menu-card-desc">
                 Nutrient-rich, nutty energy boost
               </div>
@@ -3038,7 +3120,7 @@
               <div class="menu-card-badge"><span class="sar">SAR</span>16</div>
             </div>
             <div class="menu-card-body">
-              <div class="menu-card-name">Olaya Fresh Fruit <span class="tag">M/S</span></div>
+              <div class="menu-card-name">Olaya Fresh Fruit </div>
               <div class="menu-card-desc">Light, hydrating summer refresher</div>
               <div class="menu-card-footer">
                 <div class="menu-card-kcal">190 kcal</div>
@@ -3046,36 +3128,50 @@
               <div class="arabic">أولايا فريش فروت</div>
             </div>
           </div>
+          <div class="menu-card">
+            <div class="menu-card-img-wrap">
+              <img
+                src="food-photos/OUR%20SIGNATURE%20BLEND/abooda/abooda.png"
+                alt="Abood"
+                class="menu-card-img"
+              />
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>16</div>
+            </div>
+            <div class="menu-card-body">
+              <div class="menu-card-name">Abood </div>
+              <div class="menu-card-desc">A brilliant combination of honey dew melon and mango</div>
+              <div class="menu-card-footer">
+                <div class="menu-card-kcal">560 kcal</div>
+              </div>
+              <div class="arabic">عبود</div>
+            </div>
+          </div>
+          <div class="menu-card">
+            <div class="menu-card-img-wrap">
+              <img
+                src="food-photos/OUR%20SIGNATURE%20BLEND/cold%20milo/cold%20milo.png"
+                alt="Cold Milo"
+                class="menu-card-img"
+              />
+              <div class="menu-card-img-overlay"></div>
+              <div class="menu-card-badge"><span class="sar">SAR</span>16</div>
+            </div>
+            <div class="menu-card-body">
+              <div class="menu-card-name">Cold Milo</div>
+              <div class="menu-card-desc">Chilled, malty chocolate comfort</div>
+              <div class="menu-card-footer">
+                <div class="menu-card-kcal">630 kcal</div>
+              </div>
+              <div class="arabic">ميلو كولد</div>
+            </div>
+          </div>
         </div>
         <div class="menu-list-grid" style="margin-bottom: 40px">
           <div class="menu-list-item">
-            <div class="item-icon">🥭</div>
-            <div class="menu-list-content">
-              <div class="menu-list-name">Abood <span class="tag">M/S</span></div>
-              <div class="menu-list-desc">A brilliant combination of honey dew melon and mango</div>
-              <div class="arabic">عبود</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>16</div>
-              <div class="menu-list-kcal">560 kcal</div>
-            </div>
-          </div>
-          <div class="menu-list-item">
-            <div class="item-icon">🍫</div>
-            <div class="menu-list-content">
-              <div class="menu-list-name">Cold Milo</div>
-              <div class="menu-list-desc">Chilled, malty chocolate comfort</div>
-              <div class="arabic">ميلو كولد</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>16</div>
-              <div class="menu-list-kcal">630 kcal</div>
-            </div>
-          </div>
-          <div class="menu-list-item">
             <div class="item-icon">🌹</div>
             <div class="menu-list-content">
-              <div class="menu-list-name">Queen of Heart <span class="tag">M/S</span></div>
+              <div class="menu-list-name">Queen of Heart </div>
               <div class="menu-list-desc">Nutrient-rich, nutty energy boost</div>
               <div class="arabic">كوين أوف هارت</div>
             </div>
@@ -3087,7 +3183,9 @@
           <div class="menu-list-item">
             <div class="item-icon">🍓</div>
             <div class="menu-list-content">
-              <div class="menu-list-name">Awar Qalb <span class="tag">M/S</span></div>
+              <div class="menu-list-name">Awar Qalb 
+
+              </div>
               <div class="menu-list-desc">Nutrient-rich, nutty energy boost</div>
               <div class="arabic">عوار قلب</div>
             </div>
@@ -3099,7 +3197,7 @@
           <div class="menu-list-item">
             <div class="item-icon">🫐</div>
             <div class="menu-list-content">
-              <div class="menu-list-name">Creamy Berries <span class="tag">M/S</span></div>
+              <div class="menu-list-name">Creamy Berries </div>
               <div class="menu-list-desc">Rich, velvety forest fruits</div>
               <div class="arabic">كريمي بيريز</div>
             </div>
@@ -3111,7 +3209,7 @@
           <div class="menu-list-item">
             <div class="item-icon">🌰</div>
             <div class="menu-list-content">
-              <div class="menu-list-name">The Blend <span class="tag">M/S</span></div>
+              <div class="menu-list-name">The Blend </div>
               <div class="menu-list-desc">Pistachio &amp; almond blend</div>
               <div class="arabic">ذا بلند</div>
             </div>
@@ -3121,7 +3219,35 @@
             </div>
           </div>
         </div>
-
+ <h3 class="sub-heading" style="margin-bottom: 24px; margin-top: 60px">
+          Killer <em>Shake</em>
+        </h3>
+        <div class="menu-list-grid" style="margin-bottom: 40px">
+          <div class="menu-list-item">
+            <div class="item-icon">🍫</div>
+            <div class="menu-list-content">
+              <div class="menu-list-name">Nutella</div>
+              <div class="menu-list-desc">Creamy, hazelnut cocoa indulgence</div>
+              <div class="arabic">نوتيلا</div>
+            </div>
+            <div class="menu-list-right">
+              <div class="menu-list-price"><span class="sar">SAR</span>30</div>
+              <div class="menu-list-kcal">650 kcal</div>
+            </div>
+          </div>
+          <div class="menu-list-item">
+            <div class="item-icon">🍫</div>
+            <div class="menu-list-content">
+              <div class="menu-list-name">Swiss Chocolate</div>
+              <div class="menu-list-desc">Rich, velvety alpine cocoa</div>
+              <div class="arabic">سويس شوكولاتة</div>
+            </div>
+            <div class="menu-list-right">
+              <div class="menu-list-price"><span class="sar">SAR</span>35</div>
+              <div class="menu-list-kcal">320 kcal</div>
+            </div>
+          </div>
+        </div>
         <h3 class="sub-heading" style="margin-bottom: 24px; margin-top: 60px">
           Fa<em>looda</em>
         </h3>
@@ -3208,43 +3334,15 @@
           </div>
         </div>
 
-        <h3 class="sub-heading" style="margin-bottom: 24px; margin-top: 60px">
-          Killer <em>Shake</em>
-        </h3>
-        <div class="menu-list-grid" style="margin-bottom: 40px">
-          <div class="menu-list-item">
-            <div class="item-icon">🍫</div>
-            <div class="menu-list-content">
-              <div class="menu-list-name">Nutella</div>
-              <div class="menu-list-desc">Creamy, hazelnut cocoa indulgence</div>
-              <div class="arabic">نوتيلا</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>30</div>
-              <div class="menu-list-kcal">650 kcal</div>
-            </div>
-          </div>
-          <div class="menu-list-item">
-            <div class="item-icon">🍫</div>
-            <div class="menu-list-content">
-              <div class="menu-list-name">Swiss Chocolate</div>
-              <div class="menu-list-desc">Rich, velvety alpine cocoa</div>
-              <div class="arabic">سويس شوكولاتة</div>
-            </div>
-            <div class="menu-list-right">
-              <div class="menu-list-price"><span class="sar">SAR</span>35</div>
-              <div class="menu-list-kcal">320 kcal</div>
-            </div>
-          </div>
-        </div>
+       
       </div>
     </section>
 
     <!-- ══════════════════════════════ FRUIT PUNCH ═════════════════════════ -->
-    <section class="section" style="background: linear-gradient(180deg, rgba(190, 24, 93, 0.20) 0%, rgba(10, 22, 40, 0.0) 100%);" id="fruitpunch">
+    <section class="section" id="fruitpunch">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">10</div>
+          <div class="section-num">09</div>
           <div class="section-title-block">
             <p class="section-label">In a Jar</p>
             <h2 class="section-title">Fruit <em>Punch</em></h2>
@@ -3329,10 +3427,10 @@
     </section>
 
     <!-- ══════════════════════════════ COFFEES ═════════════════════════════ -->
-    <section class="section" style="background: linear-gradient(180deg, rgba(120, 60, 20, 0.22) 0%, rgba(10, 22, 40, 0.0) 100%);" id="coffees">
+    <section class="section section-alt" id="coffees">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">11</div>
+          <div class="section-num">10</div>
           <div class="section-title-block">
             <p class="section-label">Morning &amp; Beyond</p>
             <h2 class="section-title">Cof<em>fees</em></h2>
@@ -3343,7 +3441,7 @@
           <div class="menu-list-item">
             <div class="item-icon">☕</div>
             <div class="menu-list-content">
-              <div class="menu-list-name">Cappuccino M/L</div>
+              <div class="menu-list-name">Cappuccino <span class="tag">m/l</span></div>
               <div class="menu-list-desc">
                 Frothy, classic Italian foam — perfect balance of espresso &amp;
                 silky microfoam
@@ -3358,7 +3456,7 @@
           <div class="menu-list-item">
             <div class="item-icon">☕</div>
             <div class="menu-list-content">
-              <div class="menu-list-name">Cafe Latte M/L</div>
+              <div class="menu-list-name">Cafe Latte <span class="tag">m/l</span></div>
               <div class="menu-list-desc">Smooth, milky espresso blend</div>
               <div class="arabic">كافي لاتيه</div>
             </div>
@@ -3406,7 +3504,7 @@
           <div class="menu-list-item">
             <div class="item-icon">🧊</div>
             <div class="menu-list-content">
-              <div class="menu-list-name">Cold Coffee Normal / With Ice Cream</div>
+              <div class="menu-list-name">Cold Coffee  <span class="tag">Normal / With Ice Cream</span></div>
               <div class="menu-list-desc">
                 Chilled, creamy caffeine kick — normal or with ice cream
               </div>
@@ -3434,10 +3532,10 @@
     </section>
 
     <!-- ══════════════════════════════ TEAS ════════════════════════════════ -->
-    <section class="section section-alt" style="background: linear-gradient(180deg, rgba(20, 120, 80, 0.20) 0%, rgba(10, 22, 40, 0.0) 100%);" id="teas">
+    <section class="section" id="teas">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">12</div>
+          <div class="section-num">11</div>
           <div class="section-title-block">
             <p class="section-label">Warm &amp; Chilled</p>
             <h2 class="section-title"><em>Tea</em> Selection</h2>
@@ -3546,10 +3644,10 @@
     </section>
 
     <!-- ══════════════════════════════ ADD ON ════════════════════════════ -->
-    <section class="section" style="background: linear-gradient(180deg, rgba(51, 65, 85, 0.25) 0%, rgba(10, 22, 40, 0.0) 100%);" id="addon">
+    <section class="section section-alt" id="addon">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">13</div>
+          <div class="section-num">12</div>
           <div class="section-title-block">
             <p class="section-label">Extras &amp; Sides</p>
             <h2 class="section-title">Add <em>On</em></h2>
@@ -3655,22 +3753,45 @@
         </div>
         <div>
           <div class="footer-col-title">Menu</div>
-          <div class="footer-col-item" onclick="scrollToSection('starters')">Appetisers</div>
-          <div class="footer-col-item" onclick="scrollToSection('burgers')">Burgers</div>
-          <div class="footer-col-item" onclick="scrollToSection('mains')">Our Specialities</div>
-          <div class="footer-col-item" onclick="scrollToSection('pasta')">Pasta</div>
-          <div class="footer-col-item" onclick="scrollToSection('salads')">Salads</div>
-          <div class="footer-col-item" onclick="scrollToSection('sandwiches')">Sandwich</div>
-          <div class="footer-col-item" onclick="scrollToSection('shawarma')">Shawarma</div>
+          <div class="footer-col-item" onclick="scrollToSection('starters')">
+            Appetisers
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('burgers')">
+            Burgers
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('mains')">
+            Our Specialities
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('pasta')">
+            Pasta &amp; Salads
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('sandwiches')">
+            Sandwiches
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('shawarma')">
+            Shawarma
+          </div>
         </div>
         <div>
           <div class="footer-col-title">More</div>
-          <div class="footer-col-item" onclick="scrollToSection('drinks')">Special Drinks</div>
-          <div class="footer-col-item" onclick="scrollToSection('shakes')">Shakes &amp; Falooda</div>
-          <div class="footer-col-item" onclick="scrollToSection('fruitpunch')">Fruit Punch</div>
-          <div class="footer-col-item" onclick="scrollToSection('coffees')">Coffee</div>
-          <div class="footer-col-item" onclick="scrollToSection('teas')">Tea</div>
-          <div class="footer-col-item" onclick="scrollToSection('addon')">Add On</div>
+          <div class="footer-col-item" onclick="scrollToSection('drinks')">
+            Special Drinks
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('shakes')">
+            Shakes &amp; Falooda
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('fruitpunch')">
+            Fruit Punch
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('coffees')">
+            Coffees
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('teas')">
+            Teas
+          </div>
+          <div class="footer-col-item" onclick="scrollToSection('addon')">
+            Add On
+          </div>
         </div>
       </div>
       <div class="footer-bottom">
@@ -3704,15 +3825,14 @@
         burgers: 1,
         mains: 2,
         pasta: 3,
-        salads: 4,
-        sandwiches: 5,
-        shawarma: 6,
-        drinks: 7,
-        shakes: 8,
-        fruitpunch: 9,
-        coffees: 10,
-        teas: 11,
-        addon: 12,
+        sandwiches: 4,
+        shawarma: 5,
+        drinks: 6,
+        shakes: 7,
+        fruitpunch: 8,
+        coffees: 9,
+        teas: 10,
+        addon: 11,
       };
       const observer = new IntersectionObserver(
         (entries) => {
