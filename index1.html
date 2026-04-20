@@ -1740,21 +1740,20 @@
         <div class="hero-divider"></div>
         <p class="hero-sub">The taste you’ll remember.</p>
         <div class="hero-cta-row">
-                    <a
-            href="#starters"
+          <a
+            href="#coffees"
             class="btn-primary"
+            onclick="smoothScroll('coffees')"
+          >
+            ☕ Explore Menu
+          </a>
+          <a
+            href="#starters"
+            class="btn-secondary"
             onclick="smoothScroll('starters')"
           >
             🍔 View Food
           </a>
-          <a
-            href="#drinks"
-            class="btn-secondary"
-            onclick="smoothScroll('drinks')"
-          >
-            ☕ View Drinks
-          </a>
-
         </div>
       </div>
 
@@ -1768,7 +1767,7 @@
     <div class="stats-bar">
       <div class="stats-inner">
         <div class="stat">
-          <div class="stat-num">11+</div>
+          <div class="stat-num">13</div>
           <div class="stat-label">Menu Categories</div>
         </div>
         <div class="stat">
@@ -1791,31 +1790,24 @@
     <nav class="nav-wrap">
       <div class="nav" id="mainNav">
         <div class="nav-logo">Mid<span>town</span></div>
-        <div class="nav-item active" onclick="scrollToSection('starters')">Starters</div>
+        <div class="nav-item active" onclick="scrollToSection('starters')">Appetisers</div>
         <div class="nav-item" onclick="scrollToSection('burgers')">Burgers</div>
-        <div class="nav-item" onclick="scrollToSection('mains')">Our Specialities</div>
-        <div class="nav-item" onclick="scrollToSection('pasta')">
-          Pasta &amp; Salads
-        </div>
-        <div class="nav-item" onclick="scrollToSection('sandwiches')">
-          Sandwiches
-        </div>
-        <div class="nav-item" onclick="scrollToSection('shawarma')">
-          Shawarma
-        </div>
+        <div class="nav-item" onclick="scrollToSection('mains')">Specialities</div>
+        <div class="nav-item" onclick="scrollToSection('pasta')">Pasta</div>
+        <div class="nav-item" onclick="scrollToSection('salads')">Salads</div>
+        <div class="nav-item" onclick="scrollToSection('sandwiches')">Sandwich</div>
+        <div class="nav-item" onclick="scrollToSection('shawarma')">Shawarma</div>
         <div class="nav-item" onclick="scrollToSection('drinks')">Drinks</div>
         <div class="nav-item" onclick="scrollToSection('shakes')">Shakes</div>
-        <div class="nav-item" onclick="scrollToSection('fruitpunch')">
-          Fruit Punch
-        </div>
-        <div class="nav-item" onclick="scrollToSection('coffees')">Coffees</div>
-        <div class="nav-item" onclick="scrollToSection('teas')">Teas</div>
+        <div class="nav-item" onclick="scrollToSection('fruitpunch')">Fruit Punch</div>
+        <div class="nav-item" onclick="scrollToSection('coffees')">Coffee</div>
+        <div class="nav-item" onclick="scrollToSection('teas')">Tea</div>
         <div class="nav-item" onclick="scrollToSection('addon')">Add On</div>
       </div>
     </nav>
 
     <!-- ══════════════════════════════ STARTERS ════════════════════════════ -->
-    <section class="section" id="starters">
+    <section class="section" style="background: linear-gradient(180deg, rgba(180, 83, 9, 0.18) 0%, rgba(10, 22, 40, 0.0) 100%);" id="starters">
       <div class="container">
         <div class="section-header">
           <div class="section-num">01</div>
@@ -1944,7 +1936,7 @@
     </section>
 
     <!-- ══════════════════════════════ BURGERS ═════════════════════════════ -->
-    <section class="section section-alt" id="burgers">
+    <section class="section section-alt" style="background: linear-gradient(180deg, rgba(185, 28, 28, 0.18) 0%, rgba(10, 22, 40, 0.0) 100%);" id="burgers">
       <div class="container">
         <div class="section-header">
           <div class="section-num">02</div>
@@ -2113,7 +2105,7 @@
     </section>
 
     <!-- ══════════════════════════════ MAINS ═══════════════════════════════ -->
-    <section class="section" id="mains">
+    <section class="section" style="background: linear-gradient(180deg, rgba(109, 40, 217, 0.18) 0%, rgba(10, 22, 40, 0.0) 100%);" id="mains">
       <div class="container">
         <div class="section-header">
           <div class="section-num">03</div>
@@ -2244,21 +2236,18 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════ PASTA & SALADS ══════════════════════ -->
-    <section class="section section-alt" id="pasta">
+    <!-- ══════════════════════════════ PASTA ══════════════════════════════ -->
+    <section class="section" id="pasta" style="background: linear-gradient(180deg, rgba(194, 120, 46, 0.18) 0%, rgba(10, 22, 40, 0.0) 100%);">
       <div class="container">
         <div class="section-header">
           <div class="section-num">04</div>
           <div class="section-title-block">
             <p class="section-label">Freshness on a Plate</p>
-            <h2 class="section-title">Pasta &amp; <em>Salads</em></h2>
+            <h2 class="section-title">Pas<em>ta</em></h2>
           </div>
           <div class="section-line"></div>
         </div>
-
-        <div class="two-col-grid">
-          <div>
-            <h3 class="sub-heading">Pas<em>ta</em></h3>
+        <h3 class="sub-heading">Pas<em>ta</em></h3>
             <div class="menu-grid" style="margin-bottom: 0">
               <div class="menu-card">
                 <div class="menu-card-img-wrap">
@@ -2329,9 +2318,21 @@
                 </div>
               </div>
             </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════ SALADS ══════════════════════════════ -->
+    <section class="section" id="salads" style="background: linear-gradient(180deg, rgba(22, 101, 52, 0.22) 0%, rgba(10, 22, 40, 0.0) 100%);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-num">05</div>
+          <div class="section-title-block">
+            <p class="section-label">Fresh &amp; Light</p>
+            <h2 class="section-title">Sal<em>ads</em></h2>
           </div>
-          <div>
-            <h3 class="sub-heading">Sal<em>ads</em></h3>
+          <div class="section-line"></div>
+        </div>
+        <h3 class="sub-heading">Sal<em>ads</em></h3>
             <div
               class="menu-grid"
               style="grid-template-columns: 1fr; margin-bottom: 16px"
@@ -2391,17 +2392,14 @@
                 </div>
               </div>
             </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
     <!-- ══════════════════════════════ SANDWICHES ══════════════════════════ -->
-    <section class="section" id="sandwiches">
+    <section class="section" style="background: linear-gradient(180deg, rgba(14, 116, 144, 0.18) 0%, rgba(10, 22, 40, 0.0) 100%);" id="sandwiches">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">05</div>
+          <div class="section-num">06</div>
           <div class="section-title-block">
             <p class="section-label">Club &amp; Long</p>
             <h2 class="section-title">Sand<em>wiches</em></h2>
@@ -2577,10 +2575,10 @@
     </section>
 
     <!-- ══════════════════════════════ SHAWARMA ════════════════════════════ -->
-    <section class="section section-alt" id="shawarma">
+    <section class="section section-alt" style="background: linear-gradient(180deg, rgba(161, 130, 0, 0.20) 0%, rgba(10, 22, 40, 0.0) 100%);" id="shawarma">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">06</div>
+          <div class="section-num">07</div>
           <div class="section-title-block">
             <p class="section-label">Rolled to Perfection</p>
             <h2 class="section-title">Sha<em>warma</em></h2>
@@ -2656,10 +2654,10 @@
     </section>
 
     <!-- ══════════════════════════════ DRINKS ══════════════════════════════ -->
-    <section class="section" id="drinks">
+    <section class="section" style="background: linear-gradient(180deg, rgba(37, 99, 235, 0.20) 0%, rgba(10, 22, 40, 0.0) 100%);" id="drinks">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">07</div>
+          <div class="section-num">08</div>
           <div class="section-title-block">
             <p class="section-label">Refresh &amp; Revive</p>
             <h2 class="section-title">Spe<em>cial Drinks</em></h2>
@@ -2972,10 +2970,10 @@
     </section>
 
     <!-- ══════════════════════════════ SHAKES ══════════════════════════════ -->
-    <section class="section section-alt" id="shakes">
+    <section class="section section-alt" style="background: linear-gradient(180deg, rgba(91, 33, 182, 0.20) 0%, rgba(10, 22, 40, 0.0) 100%);" id="shakes">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">08</div>
+          <div class="section-num">09</div>
           <div class="section-title-block">
             <p class="section-label">Thick &amp; Indulgent</p>
             <h2 class="section-title">Shakes &amp; <em>Falooda</em></h2>
@@ -3243,10 +3241,10 @@
     </section>
 
     <!-- ══════════════════════════════ FRUIT PUNCH ═════════════════════════ -->
-    <section class="section" id="fruitpunch">
+    <section class="section" style="background: linear-gradient(180deg, rgba(190, 24, 93, 0.20) 0%, rgba(10, 22, 40, 0.0) 100%);" id="fruitpunch">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">09</div>
+          <div class="section-num">10</div>
           <div class="section-title-block">
             <p class="section-label">In a Jar</p>
             <h2 class="section-title">Fruit <em>Punch</em></h2>
@@ -3331,10 +3329,10 @@
     </section>
 
     <!-- ══════════════════════════════ COFFEES ═════════════════════════════ -->
-    <section class="section section-alt" id="coffees">
+    <section class="section" style="background: linear-gradient(180deg, rgba(120, 60, 20, 0.22) 0%, rgba(10, 22, 40, 0.0) 100%);" id="coffees">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">10</div>
+          <div class="section-num">11</div>
           <div class="section-title-block">
             <p class="section-label">Morning &amp; Beyond</p>
             <h2 class="section-title">Cof<em>fees</em></h2>
@@ -3436,10 +3434,10 @@
     </section>
 
     <!-- ══════════════════════════════ TEAS ════════════════════════════════ -->
-    <section class="section" id="teas">
+    <section class="section section-alt" style="background: linear-gradient(180deg, rgba(20, 120, 80, 0.20) 0%, rgba(10, 22, 40, 0.0) 100%);" id="teas">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">11</div>
+          <div class="section-num">12</div>
           <div class="section-title-block">
             <p class="section-label">Warm &amp; Chilled</p>
             <h2 class="section-title"><em>Tea</em> Selection</h2>
@@ -3548,10 +3546,10 @@
     </section>
 
     <!-- ══════════════════════════════ ADD ON ════════════════════════════ -->
-    <section class="section section-alt" id="addon">
+    <section class="section" style="background: linear-gradient(180deg, rgba(51, 65, 85, 0.25) 0%, rgba(10, 22, 40, 0.0) 100%);" id="addon">
       <div class="container">
         <div class="section-header">
-          <div class="section-num">12</div>
+          <div class="section-num">13</div>
           <div class="section-title-block">
             <p class="section-label">Extras &amp; Sides</p>
             <h2 class="section-title">Add <em>On</em></h2>
@@ -3657,45 +3655,22 @@
         </div>
         <div>
           <div class="footer-col-title">Menu</div>
-          <div class="footer-col-item" onclick="scrollToSection('starters')">
-            Appetisers
-          </div>
-          <div class="footer-col-item" onclick="scrollToSection('burgers')">
-            Burgers
-          </div>
-          <div class="footer-col-item" onclick="scrollToSection('mains')">
-            Our Specialities
-          </div>
-          <div class="footer-col-item" onclick="scrollToSection('pasta')">
-            Pasta &amp; Salads
-          </div>
-          <div class="footer-col-item" onclick="scrollToSection('sandwiches')">
-            Sandwiches
-          </div>
-          <div class="footer-col-item" onclick="scrollToSection('shawarma')">
-            Shawarma
-          </div>
+          <div class="footer-col-item" onclick="scrollToSection('starters')">Appetisers</div>
+          <div class="footer-col-item" onclick="scrollToSection('burgers')">Burgers</div>
+          <div class="footer-col-item" onclick="scrollToSection('mains')">Our Specialities</div>
+          <div class="footer-col-item" onclick="scrollToSection('pasta')">Pasta</div>
+          <div class="footer-col-item" onclick="scrollToSection('salads')">Salads</div>
+          <div class="footer-col-item" onclick="scrollToSection('sandwiches')">Sandwich</div>
+          <div class="footer-col-item" onclick="scrollToSection('shawarma')">Shawarma</div>
         </div>
         <div>
           <div class="footer-col-title">More</div>
-          <div class="footer-col-item" onclick="scrollToSection('drinks')">
-            Special Drinks
-          </div>
-          <div class="footer-col-item" onclick="scrollToSection('shakes')">
-            Shakes &amp; Falooda
-          </div>
-          <div class="footer-col-item" onclick="scrollToSection('fruitpunch')">
-            Fruit Punch
-          </div>
-          <div class="footer-col-item" onclick="scrollToSection('coffees')">
-            Coffees
-          </div>
-          <div class="footer-col-item" onclick="scrollToSection('teas')">
-            Teas
-          </div>
-          <div class="footer-col-item" onclick="scrollToSection('addon')">
-            Add On
-          </div>
+          <div class="footer-col-item" onclick="scrollToSection('drinks')">Special Drinks</div>
+          <div class="footer-col-item" onclick="scrollToSection('shakes')">Shakes &amp; Falooda</div>
+          <div class="footer-col-item" onclick="scrollToSection('fruitpunch')">Fruit Punch</div>
+          <div class="footer-col-item" onclick="scrollToSection('coffees')">Coffee</div>
+          <div class="footer-col-item" onclick="scrollToSection('teas')">Tea</div>
+          <div class="footer-col-item" onclick="scrollToSection('addon')">Add On</div>
         </div>
       </div>
       <div class="footer-bottom">
@@ -3729,14 +3704,15 @@
         burgers: 1,
         mains: 2,
         pasta: 3,
-        sandwiches: 4,
-        shawarma: 5,
-        drinks: 6,
-        shakes: 7,
-        fruitpunch: 8,
-        coffees: 9,
-        teas: 10,
-        addon: 11,
+        salads: 4,
+        sandwiches: 5,
+        shawarma: 6,
+        drinks: 7,
+        shakes: 8,
+        fruitpunch: 9,
+        coffees: 10,
+        teas: 11,
+        addon: 12,
       };
       const observer = new IntersectionObserver(
         (entries) => {
